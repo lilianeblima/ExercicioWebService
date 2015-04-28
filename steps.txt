@@ -1,0 +1,12 @@
+STEPS
+
+colocar em dicionário
+     verif user repo
+     verif parent-owner-login = MackMobile
+          (dentro da page do repo ?) (outro dic)
+
+usar outro dicionario
+     verif pull requests
+     verif user, ver numero do pull request
+outro dicionário
+     listar labels e tarefa
