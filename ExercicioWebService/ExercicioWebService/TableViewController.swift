@@ -10,6 +10,9 @@ import UIKit
 
 class TableViewController: UITableViewController {
 
+    var MyTextField: UITextField!
+    var UserName: NSString?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,6 +23,40 @@ class TableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        self.addAlert()
+        
+    }
+    
+    
+    
+    func addAlert()
+    {
+        let alert:UIAlertController = UIAlertController(title: "Pesquisa de usuário", message: "Por Favor, insira o user desejado", preferredStyle: .Alert)
+        
+        alert.addTextFieldWithConfigurationHandler{
+            textField -> Void in
+            self.MyTextField = textField
+        }
+        
+        let action1:UIAlertAction = UIAlertAction(title: "OK", style: .Default) {action -> Void in
+            
+            if self.MyTextField.text == "" {
+                self.addAlert()
+            }
+            self.UserName = self.MyTextField.text
+            print(self.UserName)
+        }
+        
+        alert.addAction(action1)
+        
+        self.presentViewController(alert, animated: true, completion: {
+            
+        })
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
