@@ -83,6 +83,7 @@
 			children = (
 				0294BD7F1AEE6A8100BF3C98 /* AppDelegate.swift */,
 				0294BD841AEE6A8100BF3C98 /* ViewController.swift */,
+				02D5F7831AEFA96C003A80D1 /* TableViewController.swift */,
 				0294BD861AEE6A8100BF3C98 /* Main.storyboard */,
 				D68D50D61AEFA884008CD64F /* Webservice.swift */,
 				0294BD891AEE6A8100BF3C98 /* Images.xcassets */,
@@ -222,6 +223,7 @@
 				0294BD831AEE6A8100BF3C98 /* ExercicioWebService.xcdatamodeld in Sources */,
 				D68D50D71AEFA884008CD64F /* Webservice.swift in Sources */,
 				0294BD801AEE6A8100BF3C98 /* AppDelegate.swift in Sources */,
+				02D5F7841AEFA96C003A80D1 /* TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
