@@ -4,53 +4,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
-            <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="ExercicioWebService" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bem-Vindo!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ud3-qv-Gio">
-                                <rect key="frame" x="210" y="119" width="124" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Git_User" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2hD-dd-5Ip">
-                                <rect key="frame" x="224" y="285" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wig-U9-hI8">
-                                <rect key="frame" x="46" y="514" width="100" height="30"/>
-                                <state key="normal" title="Trocar Usuario">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KsN-dG-aWj">
-                                <rect key="frame" x="456" y="514" width="113" height="30"/>
-                                <state key="normal" title="Ver Repositorios">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="qqR-nM-Ao4" kind="show" id="HUE-jE-ams"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="gdI-xJ-BYs"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="915" y="670"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="euA-s0-Xg0">
             <objects>
@@ -60,12 +13,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="KcG-gO-LrV"/>
+                        <segue destination="qqR-nM-Ao4" kind="relationship" relationship="rootViewController" id="517-eT-dyB"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tc8-LS-7Hc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="176" y="670"/>
+            <point key="canvasLocation" x="1032" y="670"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="KCe-1g-bzS">
@@ -104,6 +57,9 @@
                             <outlet property="delegate" destination="qqR-nM-Ao4" id="pVH-mU-lot"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="GXA-Sf-efB">
+                        <barButtonItem key="leftBarButtonItem" title="Trocar Usuario" id="NtU-Ac-UL1"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fNr-kt-5EQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -112,7 +68,7 @@
         <!--View Controller-->
         <scene sceneID="fb6-ZP-aAK">
             <objects>
-                <viewController id="jId-gl-MMk" sceneMemberID="viewController">
+                <viewController id="jId-gl-MMk" customClass="ViewController" customModule="ExercicioWebService" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BGc-oS-AVa"/>
                         <viewControllerLayoutGuide type="bottom" id="6s6-uy-YFG"/>

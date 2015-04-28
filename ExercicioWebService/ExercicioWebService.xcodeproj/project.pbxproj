@@ -14,6 +14,7 @@
 		0294BD8A1AEE6A8100BF3C98 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0294BD891AEE6A8100BF3C98 /* Images.xcassets */; };
 		0294BD8D1AEE6A8100BF3C98 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0294BD8B1AEE6A8100BF3C98 /* LaunchScreen.xib */; };
 		0294BD991AEE6A8100BF3C98 /* ExercicioWebServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0294BD981AEE6A8100BF3C98 /* ExercicioWebServiceTests.swift */; };
+		02D5F7841AEFA96C003A80D1 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5F7831AEFA96C003A80D1 /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		0294BD921AEE6A8100BF3C98 /* ExercicioWebServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExercicioWebServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294BD971AEE6A8100BF3C98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0294BD981AEE6A8100BF3C98 /* ExercicioWebServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercicioWebServiceTests.swift; sourceTree = "<group>"; };
+		02D5F7831AEFA96C003A80D1 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 			children = (
 				0294BD7F1AEE6A8100BF3C98 /* AppDelegate.swift */,
 				0294BD841AEE6A8100BF3C98 /* ViewController.swift */,
+				02D5F7831AEFA96C003A80D1 /* TableViewController.swift */,
 				0294BD861AEE6A8100BF3C98 /* Main.storyboard */,
 				0294BD891AEE6A8100BF3C98 /* Images.xcassets */,
 				0294BD8B1AEE6A8100BF3C98 /* LaunchScreen.xib */,
@@ -218,6 +221,7 @@
 				0294BD851AEE6A8100BF3C98 /* ViewController.swift in Sources */,
 				0294BD831AEE6A8100BF3C98 /* ExercicioWebService.xcdatamodeld in Sources */,
 				0294BD801AEE6A8100BF3C98 /* AppDelegate.swift in Sources */,
+				02D5F7841AEFA96C003A80D1 /* TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +417,7 @@
 				0294BD9E1AEE6A8100BF3C98 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0294BD9F1AEE6A8100BF3C98 /* Build configuration list for PBXNativeTarget "ExercicioWebServiceTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +426,7 @@
 				0294BDA11AEE6A8100BF3C98 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
