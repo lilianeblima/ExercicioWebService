@@ -17,6 +17,7 @@
 		11A34B751AF1039D007A8BB9 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A34B741AF1039D007A8BB9 /* TableViewController.swift */; };
 		11A34B771AF103D3007A8BB9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A34B761AF103D3007A8BB9 /* User.swift */; };
 		D68D50D71AEFA884008CD64F /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68D50D61AEFA884008CD64F /* Webservice.swift */; };
+		D6FF3E871AF0FD3B00CA1BE6 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF3E861AF0FD3B00CA1BE6 /* Connection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		11A34B741AF1039D007A8BB9 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		11A34B761AF103D3007A8BB9 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D68D50D61AEFA884008CD64F /* Webservice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
+		D6FF3E861AF0FD3B00CA1BE6 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				0294BD811AEE6A8100BF3C98 /* ExercicioWebService.xcdatamodeld */,
 				11A34B761AF103D3007A8BB9 /* User.swift */,
 				0294BD7D1AEE6A8100BF3C98 /* Supporting Files */,
+				D6FF3E861AF0FD3B00CA1BE6 /* Connection.swift */,
 			);
 			path = ExercicioWebService;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0294BD851AEE6A8100BF3C98 /* ViewController.swift in Sources */,
+				D6FF3E871AF0FD3B00CA1BE6 /* Connection.swift in Sources */,
 				0294BD831AEE6A8100BF3C98 /* ExercicioWebService.xcdatamodeld in Sources */,
 				11A34B771AF103D3007A8BB9 /* User.swift in Sources */,
 				D68D50D71AEFA884008CD64F /* Webservice.swift in Sources */,
