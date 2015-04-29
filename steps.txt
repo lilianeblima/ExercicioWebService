@@ -2,6 +2,7 @@ STEPS
 
 colocar em dicionário
      verif user repo
+colocar em dicionário (verif forks)
      verif parent-owner-login = MackMobile
           (dentro da page do repo ?) (outro dic)
 
@@ -10,3 +11,9 @@ usar outro dicionario
      verif user, ver numero do pull request
 outro dicionário
      listar labels e tarefa
+
+
+
+// Commands
+curl -u "webserviceGit" https://api.github.com
+webserviceGit123
