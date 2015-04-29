@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Connection: NSObject {
+class Connection: NSObject, NSURLConnectionDelegate{
    
     var data: NSData = NSData()
     
@@ -33,12 +33,13 @@ class Connection: NSObject {
     
     
     //NSURLConnection delegate method
-    func connection(connection: NSURLConnection!, didFailWithError error: NSError!) {
+    func connection(connection: NSURLConnection, didFailWithError error: NSError) {
         println("Failed with error:\(error.localizedDescription)")
     }
     
     //NSURLConnection delegate method
     func connection(didReceiveResponse: NSURLConnection!, didReceiveResponse response: NSURLResponse!) {
+        println("recebido")
         //New request so we need to clear the data object
         //self.data = NSMutableData()
     }
