@@ -59,12 +59,23 @@ class Webservice: NSObject {
                 repos.append(repo)
             }
         }
-        return repos
+        return repos    //Array de dicionárois com os repositórios fork
+        
+        
+        
+        
+        
     }
     
-//    func getUserData -> User
+//    func getUserData (String user) -> User
     
-//    func getRepoData -> Repository
+//    func genRepoArray (user: String){
+////      var repoArray: Array = Array<Repository>
+//        
+//        let repoDics = getMackmobileForks(user)
+//        
+//        
+//    }
     
     
     
