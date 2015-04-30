@@ -15,10 +15,20 @@ class TableViewController: UITableViewController {
     var defaults = NSUserDefaults.standardUserDefaults()
     var MyTextField: UITextField!
     var UserName: NSString?
+    var teste: NSMutableArray!
     var people = [NSManagedObject]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        teste = ["1", "2", "3"]
+        
     
     }
 
@@ -121,9 +131,11 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 1
+      //  return teste!.count
+        //return 1
     }
 
     
@@ -131,6 +143,10 @@ class TableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
 
         // Configure the cell...
+       //x var i: NSInteger
+        //i = indexPath.row
+        
+        //cell.textLabel?.text = teste[indexPath.row] as? String
         
         //let person = people[indexPath.row]
         self.UserName = self.person?.valueForKey("name") as? String
@@ -139,6 +155,18 @@ class TableViewController: UITableViewController {
 
         return cell
     }
+    
+    func getDetails(arrayLabels: NSNotification) {
+        
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let notif: NSNotificationCenter = NSNotificationCenter.defaultCenter()
+        
+//        var arrLabels: NSDictionary = NSDictionary(object: labels, forKey:"passInfo")
+//        notif.postNotificationName("allLabels", object: self, userInfo: arrLabels as [NSObject: AnyObject])
+    }
+    
 
 
     /*

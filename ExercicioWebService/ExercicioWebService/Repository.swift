@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  Repository.swift
 //  ExercicioWebService
 //
 //  Created by Liliane Bezerra Lima on 30/04/15.
@@ -8,9 +8,10 @@
 
 import UIKit
 
-class User: NSObject {
+class Repository: NSObject {
     
-    var login:NSString!
-    var img:NSString!
+    var parent:NSString!
+    var name:NSString!
+    var labels:NSString!
    
 }

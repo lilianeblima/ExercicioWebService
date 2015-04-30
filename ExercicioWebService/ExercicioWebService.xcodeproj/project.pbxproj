@@ -14,8 +14,9 @@
 		0294BD8A1AEE6A8100BF3C98 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0294BD891AEE6A8100BF3C98 /* Images.xcassets */; };
 		0294BD8D1AEE6A8100BF3C98 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0294BD8B1AEE6A8100BF3C98 /* LaunchScreen.xib */; };
 		0294BD991AEE6A8100BF3C98 /* ExercicioWebServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0294BD981AEE6A8100BF3C98 /* ExercicioWebServiceTests.swift */; };
-		11A34B751AF1039D007A8BB9 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A34B741AF1039D007A8BB9 /* TableViewController.swift */; };
-		11A34B771AF103D3007A8BB9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A34B761AF103D3007A8BB9 /* User.swift */; };
+		02D4177D1AF0F8C5007DACF2 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D4177C1AF0F8C5007DACF2 /* TableViewController.swift */; };
+		112A92A51AF24961007E615E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112A92A41AF24961007E615E /* User.swift */; };
+		112A92A71AF24A10007E615E /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112A92A61AF24A10007E615E /* Repository.swift */; };
 		D68D50D71AEFA884008CD64F /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68D50D61AEFA884008CD64F /* Webservice.swift */; };
 		D6FF3E871AF0FD3B00CA1BE6 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF3E861AF0FD3B00CA1BE6 /* Connection.swift */; };
 /* End PBXBuildFile section */
@@ -42,8 +43,9 @@
 		0294BD921AEE6A8100BF3C98 /* ExercicioWebServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExercicioWebServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294BD971AEE6A8100BF3C98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0294BD981AEE6A8100BF3C98 /* ExercicioWebServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercicioWebServiceTests.swift; sourceTree = "<group>"; };
-		11A34B741AF1039D007A8BB9 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		11A34B761AF103D3007A8BB9 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		02D4177C1AF0F8C5007DACF2 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		112A92A41AF24961007E615E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		112A92A61AF24A10007E615E /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		D68D50D61AEFA884008CD64F /* Webservice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
 		D6FF3E861AF0FD3B00CA1BE6 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,15 +89,16 @@
 		0294BD7C1AEE6A8100BF3C98 /* ExercicioWebService */ = {
 			isa = PBXGroup;
 			children = (
-				11A34B741AF1039D007A8BB9 /* TableViewController.swift */,
 				0294BD7F1AEE6A8100BF3C98 /* AppDelegate.swift */,
 				0294BD841AEE6A8100BF3C98 /* ViewController.swift */,
+				02D4177C1AF0F8C5007DACF2 /* TableViewController.swift */,
 				0294BD861AEE6A8100BF3C98 /* Main.storyboard */,
 				D68D50D61AEFA884008CD64F /* Webservice.swift */,
 				0294BD891AEE6A8100BF3C98 /* Images.xcassets */,
 				0294BD8B1AEE6A8100BF3C98 /* LaunchScreen.xib */,
 				0294BD811AEE6A8100BF3C98 /* ExercicioWebService.xcdatamodeld */,
-				11A34B761AF103D3007A8BB9 /* User.swift */,
+				112A92A41AF24961007E615E /* User.swift */,
+				112A92A61AF24A10007E615E /* Repository.swift */,
 				0294BD7D1AEE6A8100BF3C98 /* Supporting Files */,
 				D6FF3E861AF0FD3B00CA1BE6 /* Connection.swift */,
 			);
@@ -230,10 +233,11 @@
 				0294BD851AEE6A8100BF3C98 /* ViewController.swift in Sources */,
 				D6FF3E871AF0FD3B00CA1BE6 /* Connection.swift in Sources */,
 				0294BD831AEE6A8100BF3C98 /* ExercicioWebService.xcdatamodeld in Sources */,
-				11A34B771AF103D3007A8BB9 /* User.swift in Sources */,
+				112A92A71AF24A10007E615E /* Repository.swift in Sources */,
 				D68D50D71AEFA884008CD64F /* Webservice.swift in Sources */,
-				11A34B751AF1039D007A8BB9 /* TableViewController.swift in Sources */,
+				02D4177D1AF0F8C5007DACF2 /* TableViewController.swift in Sources */,
 				0294BD801AEE6A8100BF3C98 /* AppDelegate.swift in Sources */,
+				112A92A51AF24961007E615E /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
