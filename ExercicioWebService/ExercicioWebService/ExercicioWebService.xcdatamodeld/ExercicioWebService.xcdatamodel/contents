@@ -3,15 +3,15 @@
     <entity name="Labels" representedClassName="Labels" syncable="YES">
         <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="repository" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Repository" inverseName="labels" inverseEntity="Repository" syncable="YES"/>
+        <relationship name="repository" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Repositoryy" inverseName="labels" inverseEntity="Repositoryy" syncable="YES"/>
     </entity>
-    <entity name="Repository" representedClassName="Repository" syncable="YES">
+    <entity name="Repositoryy" representedClassName="Repositoryy" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="parent" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="labels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Labels" inverseName="repository" inverseEntity="Labels" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Repository" positionX="-2" positionY="-153" width="128" height="88"/>
         <element name="Labels" positionX="-81" positionY="45" width="128" height="88"/>
+        <element name="Repositoryy" positionX="-2" positionY="-153" width="128" height="90"/>
     </elements>
 </model>

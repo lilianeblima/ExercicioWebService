@@ -30,7 +30,7 @@ class TableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         let ws = Webservice()
-        print( ws.getMackmobileForks("jhpg") )
+       // print( ws.getMackmobileForks("jhpg") )
     
         
         //Teste - tirar

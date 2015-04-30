@@ -15,7 +15,9 @@
 		0294BD8D1AEE6A8100BF3C98 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0294BD8B1AEE6A8100BF3C98 /* LaunchScreen.xib */; };
 		0294BD991AEE6A8100BF3C98 /* ExercicioWebServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0294BD981AEE6A8100BF3C98 /* ExercicioWebServiceTests.swift */; };
 		02D4177D1AF0F8C5007DACF2 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D4177C1AF0F8C5007DACF2 /* TableViewController.swift */; };
-		112A92A51AF24961007E615E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112A92A41AF24961007E615E /* User.swift */; };
+		1148E13E1AF2C91200283E68 /* Repositoryy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1148E13D1AF2C91200283E68 /* Repositoryy.swift */; };
+		1148E1431AF2CA0400283E68 /* LabelsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1148E1421AF2CA0400283E68 /* LabelsManager.swift */; };
+		1148E1451AF2CA2400283E68 /* RepositoryyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1148E1441AF2CA2400283E68 /* RepositoryyManager.swift */; };
 		D643CE711AF255550010E7F1 /* JSONService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D643CE701AF255550010E7F1 /* JSONService.swift */; };
 		D643CE731AF2558B0010E7F1 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D643CE721AF2558B0010E7F1 /* JSON.swift */; };
 		D643CE751AF27A610010E7F1 /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D643CE741AF27A610010E7F1 /* Labels.swift */; };
@@ -47,8 +49,10 @@
 		0294BD971AEE6A8100BF3C98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0294BD981AEE6A8100BF3C98 /* ExercicioWebServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercicioWebServiceTests.swift; sourceTree = "<group>"; };
 		02D4177C1AF0F8C5007DACF2 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		112A92A41AF24961007E615E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		112A92A61AF24A10007E615E /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		1148E13D1AF2C91200283E68 /* Repositoryy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Repositoryy.swift; path = ../Repositoryy.swift; sourceTree = "<group>"; };
+		1148E1421AF2CA0400283E68 /* LabelsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelsManager.swift; sourceTree = "<group>"; };
+		1148E1441AF2CA2400283E68 /* RepositoryyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryyManager.swift; sourceTree = "<group>"; };
 		D643CE701AF255550010E7F1 /* JSONService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONService.swift; sourceTree = "<group>"; };
 		D643CE721AF2558B0010E7F1 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSON.swift; path = ExercicioWebService/JSON.swift; sourceTree = "<group>"; };
 		D643CE741AF27A610010E7F1 /* Labels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
@@ -99,6 +103,7 @@
 			children = (
 				0294BD7F1AEE6A8100BF3C98 /* AppDelegate.swift */,
 				0294BD841AEE6A8100BF3C98 /* ViewController.swift */,
+				1148E13F1AF2C92F00283E68 /* CoreData */,
 				02D4177C1AF0F8C5007DACF2 /* TableViewController.swift */,
 				0294BD861AEE6A8100BF3C98 /* Main.storyboard */,
 				D643CE6F1AF24C7F0010E7F1 /* Model */,
@@ -137,11 +142,36 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		1148E13F1AF2C92F00283E68 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				1148E1411AF2C9A800283E68 /* CoreData Managers */,
+				1148E1401AF2C94100283E68 /* Entity */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		1148E1401AF2C94100283E68 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				1148E13D1AF2C91200283E68 /* Repositoryy.swift */,
+				D643CE741AF27A610010E7F1 /* Labels.swift */,
+			);
+			name = Entity;
+			sourceTree = "<group>";
+		};
+		1148E1411AF2C9A800283E68 /* CoreData Managers */ = {
+			isa = PBXGroup;
+			children = (
+				1148E1421AF2CA0400283E68 /* LabelsManager.swift */,
+				1148E1441AF2CA2400283E68 /* RepositoryyManager.swift */,
+			);
+			name = "CoreData Managers";
+			sourceTree = "<group>";
+		};
 		D643CE6F1AF24C7F0010E7F1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D643CE741AF27A610010E7F1 /* Labels.swift */,
-				112A92A41AF24961007E615E /* User.swift */,
 				112A92A61AF24A10007E615E /* Repository.swift */,
 			);
 			name = Model;
@@ -247,9 +277,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1148E1431AF2CA0400283E68 /* LabelsManager.swift in Sources */,
 				D643CE711AF255550010E7F1 /* JSONService.swift in Sources */,
 				D643CE731AF2558B0010E7F1 /* JSON.swift in Sources */,
 				0294BD851AEE6A8100BF3C98 /* ViewController.swift in Sources */,
+				1148E13E1AF2C91200283E68 /* Repositoryy.swift in Sources */,
+				1148E1451AF2CA2400283E68 /* RepositoryyManager.swift in Sources */,
 				D6FF3E871AF0FD3B00CA1BE6 /* Connection.swift in Sources */,
 				0294BD831AEE6A8100BF3C98 /* ExercicioWebService.xcdatamodeld in Sources */,
 				D643CE761AF27A990010E7F1 /* Repository.swift in Sources */,
@@ -257,7 +290,6 @@
 				D643CE751AF27A610010E7F1 /* Labels.swift in Sources */,
 				02D4177D1AF0F8C5007DACF2 /* TableViewController.swift in Sources */,
 				0294BD801AEE6A8100BF3C98 /* AppDelegate.swift in Sources */,
-				112A92A51AF24961007E615E /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

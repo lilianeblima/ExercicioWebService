@@ -14,6 +14,6 @@ class Labels: NSManagedObject {
 
     @NSManaged var color: String
     @NSManaged var name: String
-    @NSManaged var repository: Repository
+    @NSManaged var repository: Repositoryy
 
 }

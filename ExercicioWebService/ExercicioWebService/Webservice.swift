@@ -9,7 +9,7 @@
 import UIKit
 
 class Webservice: NSObject {
-    
+ /*
     static let sharedInstance:Webservice = Webservice()     //Singleton
     //var repoArray: Array = Array<Repository>()
     
@@ -144,7 +144,7 @@ class Webservice: NSObject {
     
     
     
-    
+    */
 
     
     
