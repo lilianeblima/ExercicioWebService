@@ -17,6 +17,8 @@
 		02D4177D1AF0F8C5007DACF2 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D4177C1AF0F8C5007DACF2 /* TableViewController.swift */; };
 		112A92A51AF24961007E615E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112A92A41AF24961007E615E /* User.swift */; };
 		112A92A71AF24A10007E615E /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112A92A61AF24A10007E615E /* Repository.swift */; };
+		D643CE711AF255550010E7F1 /* JSONService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D643CE701AF255550010E7F1 /* JSONService.swift */; };
+		D643CE731AF2558B0010E7F1 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D643CE721AF2558B0010E7F1 /* JSON.swift */; };
 		D68D50D71AEFA884008CD64F /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68D50D61AEFA884008CD64F /* Webservice.swift */; };
 		D6FF3E871AF0FD3B00CA1BE6 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF3E861AF0FD3B00CA1BE6 /* Connection.swift */; };
 /* End PBXBuildFile section */
@@ -46,6 +48,8 @@
 		02D4177C1AF0F8C5007DACF2 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		112A92A41AF24961007E615E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		112A92A61AF24A10007E615E /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		D643CE701AF255550010E7F1 /* JSONService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONService.swift; sourceTree = "<group>"; };
+		D643CE721AF2558B0010E7F1 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSON.swift; path = ExercicioWebService/JSON.swift; sourceTree = "<group>"; };
 		D68D50D61AEFA884008CD64F /* Webservice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
 		D6FF3E861AF0FD3B00CA1BE6 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,6 +75,8 @@
 		0294BD711AEE6A8100BF3C98 = {
 			isa = PBXGroup;
 			children = (
+				D643CE721AF2558B0010E7F1 /* JSON.swift */,
+				D643CE701AF255550010E7F1 /* JSONService.swift */,
 				0294BD7C1AEE6A8100BF3C98 /* ExercicioWebService */,
 				0294BD951AEE6A8100BF3C98 /* ExercicioWebServiceTests */,
 				0294BD7B1AEE6A8100BF3C98 /* Products */,
@@ -93,12 +99,11 @@
 				0294BD841AEE6A8100BF3C98 /* ViewController.swift */,
 				02D4177C1AF0F8C5007DACF2 /* TableViewController.swift */,
 				0294BD861AEE6A8100BF3C98 /* Main.storyboard */,
+				D643CE6F1AF24C7F0010E7F1 /* Model */,
 				D68D50D61AEFA884008CD64F /* Webservice.swift */,
 				0294BD891AEE6A8100BF3C98 /* Images.xcassets */,
 				0294BD8B1AEE6A8100BF3C98 /* LaunchScreen.xib */,
 				0294BD811AEE6A8100BF3C98 /* ExercicioWebService.xcdatamodeld */,
-				112A92A41AF24961007E615E /* User.swift */,
-				112A92A61AF24A10007E615E /* Repository.swift */,
 				0294BD7D1AEE6A8100BF3C98 /* Supporting Files */,
 				D6FF3E861AF0FD3B00CA1BE6 /* Connection.swift */,
 			);
@@ -128,6 +133,15 @@
 				0294BD971AEE6A8100BF3C98 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D643CE6F1AF24C7F0010E7F1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				112A92A41AF24961007E615E /* User.swift */,
+				112A92A61AF24A10007E615E /* Repository.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,6 +244,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D643CE711AF255550010E7F1 /* JSONService.swift in Sources */,
+				D643CE731AF2558B0010E7F1 /* JSON.swift in Sources */,
 				0294BD851AEE6A8100BF3C98 /* ViewController.swift in Sources */,
 				D6FF3E871AF0FD3B00CA1BE6 /* Connection.swift in Sources */,
 				0294BD831AEE6A8100BF3C98 /* ExercicioWebService.xcdatamodeld in Sources */,

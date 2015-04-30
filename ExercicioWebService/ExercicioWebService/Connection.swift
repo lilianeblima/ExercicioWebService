@@ -28,7 +28,8 @@ class Connection: NSObject, NSURLConnectionDelegate{
         
         // fire off the request
         // make sure your class conforms to NSURLConnectionDelegate
-        let urlConnection = NSURLConnection(request: request, delegate: self)
+        let urlConnection = NSURLConnection(request: request, delegate: self, startImmediately: true)
+        urlConnection?.start()
     }
     
     

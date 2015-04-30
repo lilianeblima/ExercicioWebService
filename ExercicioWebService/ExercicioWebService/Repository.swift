@@ -10,8 +10,14 @@ import UIKit
 
 class Repository: NSObject {
     
-    var parent:NSString!
-    var name:NSString!
-    var labels:NSString!
+    var parent:NSString?
+    var name: NSString?
+    var descrip: String?
+    var milestone: String?
+    var pullUrl: String?
+    var comments: String?
+    var state: String?
+    //var labels: NSString!
+    var labels: Array<String> = []
    
 }
