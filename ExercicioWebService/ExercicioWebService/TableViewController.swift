@@ -35,6 +35,9 @@ class TableViewController: UITableViewController {
         
         //Teste - tirar
         UserConnect = defaultUser.objectForKey("UserConnect") as! NSString?
+        
+        self.title = self.UserConnect as? String
+
     }
 
     @IBAction func ChangeUser(sender: AnyObject) {
@@ -98,6 +101,8 @@ class TableViewController: UITableViewController {
                 self.defaults.setValue(1, forKey: "isFirstAccess")
                 self.tableView.reloadData()
                 self.UserConnect = self.defaultUser.objectForKey("UserConnect") as! NSString?
+                
+                self.title = self.UserConnect as? String
  
             }
 
@@ -148,7 +153,7 @@ class TableViewController: UITableViewController {
 //        cell.textLabel?.text = self.person?.valueForKey("name") as? String
         println(self.UserConnect)
         
-        cell.textLabel?.text = "\(UserConnect)"
+        cell.textLabel?.text = UserConnect as? String
         
 
         return cell
