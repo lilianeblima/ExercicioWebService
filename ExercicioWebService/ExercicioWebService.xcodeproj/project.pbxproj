@@ -16,9 +16,10 @@
 		0294BD991AEE6A8100BF3C98 /* ExercicioWebServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0294BD981AEE6A8100BF3C98 /* ExercicioWebServiceTests.swift */; };
 		02D4177D1AF0F8C5007DACF2 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D4177C1AF0F8C5007DACF2 /* TableViewController.swift */; };
 		112A92A51AF24961007E615E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112A92A41AF24961007E615E /* User.swift */; };
-		112A92A71AF24A10007E615E /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112A92A61AF24A10007E615E /* Repository.swift */; };
 		D643CE711AF255550010E7F1 /* JSONService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D643CE701AF255550010E7F1 /* JSONService.swift */; };
 		D643CE731AF2558B0010E7F1 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D643CE721AF2558B0010E7F1 /* JSON.swift */; };
+		D643CE751AF27A610010E7F1 /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D643CE741AF27A610010E7F1 /* Labels.swift */; };
+		D643CE761AF27A990010E7F1 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112A92A61AF24A10007E615E /* Repository.swift */; };
 		D68D50D71AEFA884008CD64F /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68D50D61AEFA884008CD64F /* Webservice.swift */; };
 		D6FF3E871AF0FD3B00CA1BE6 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF3E861AF0FD3B00CA1BE6 /* Connection.swift */; };
 /* End PBXBuildFile section */
@@ -50,6 +51,7 @@
 		112A92A61AF24A10007E615E /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		D643CE701AF255550010E7F1 /* JSONService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONService.swift; sourceTree = "<group>"; };
 		D643CE721AF2558B0010E7F1 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSON.swift; path = ExercicioWebService/JSON.swift; sourceTree = "<group>"; };
+		D643CE741AF27A610010E7F1 /* Labels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
 		D68D50D61AEFA884008CD64F /* Webservice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
 		D6FF3E861AF0FD3B00CA1BE6 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -138,6 +140,7 @@
 		D643CE6F1AF24C7F0010E7F1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D643CE741AF27A610010E7F1 /* Labels.swift */,
 				112A92A41AF24961007E615E /* User.swift */,
 				112A92A61AF24A10007E615E /* Repository.swift */,
 			);
@@ -249,8 +252,9 @@
 				0294BD851AEE6A8100BF3C98 /* ViewController.swift in Sources */,
 				D6FF3E871AF0FD3B00CA1BE6 /* Connection.swift in Sources */,
 				0294BD831AEE6A8100BF3C98 /* ExercicioWebService.xcdatamodeld in Sources */,
-				112A92A71AF24A10007E615E /* Repository.swift in Sources */,
+				D643CE761AF27A990010E7F1 /* Repository.swift in Sources */,
 				D68D50D71AEFA884008CD64F /* Webservice.swift in Sources */,
+				D643CE751AF27A610010E7F1 /* Labels.swift in Sources */,
 				02D4177D1AF0F8C5007DACF2 /* TableViewController.swift in Sources */,
 				0294BD801AEE6A8100BF3C98 /* AppDelegate.swift in Sources */,
 				112A92A51AF24961007E615E /* User.swift in Sources */,

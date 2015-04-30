@@ -58,7 +58,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="User" id="GXA-Sf-efB">
-                        <barButtonItem key="leftBarButtonItem" title="Trocar Usuario" id="NtU-Ac-UL1"/>
+                        <barButtonItem key="leftBarButtonItem" title="Trocar Usuario" id="NtU-Ac-UL1">
+                            <connections>
+                                <action selector="ChangeUser:" destination="qqR-nM-Ao4" id="HdY-AQ-NnT"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fNr-kt-5EQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

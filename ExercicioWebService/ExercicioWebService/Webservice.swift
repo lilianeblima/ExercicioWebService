@@ -120,14 +120,18 @@ class Webservice: NSObject {
             repo.state = repoDic.objectForKey("state") as? String
             
             let tempLabelsArray = repoDic.objectForKey("labels") as! Array<NSDictionary>
-            //var labelsArray = Array<Label>
+            var labelsArray = Array<Labels>()
+            
             for tempLabel in tempLabelsArray {
-                //var label = Label()
+                var label = Labels()
+                label.name = tempLabel.objectForKey("name") as! String
+                label.color = tempLabel.objectForKey("color") as! String
+                label.repository = repo
                 
-                //Adicionar dados de cada label e por em um vetor
+                labelsArray.append(label)
             }
             
-            
+            repo.labels = labelsArray   //Associa vetor de labels ao repositório
             repoArray.append(repo)
         }
         return repoArray

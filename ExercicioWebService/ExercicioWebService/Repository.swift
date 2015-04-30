@@ -18,6 +18,6 @@ class Repository: NSObject {
     var comments: String?
     var state: String?
     //var labels: NSString!
-    var labels: Array<String> = []
+    var labels: Array<Labels>?
    
 }

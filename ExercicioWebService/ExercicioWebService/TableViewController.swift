@@ -13,7 +13,9 @@ class TableViewController: UITableViewController {
 
     
     var defaults = NSUserDefaults.standardUserDefaults()
-    var MyTextField: UITextField!
+    var defaultUser = NSUserDefaults.standardUserDefaults()
+    var UserConnect:NSString?
+    var MyTextField: UITextField?
     var UserName: NSString?
     var teste: NSMutableArray!
     var people = [NSManagedObject]()
@@ -27,11 +29,19 @@ class TableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-//        let ws = Webservice()
-//        print( ws.getMackmobileForks("jhpg") )
+        let ws = Webservice()
+        print( ws.getMackmobileForks("jhpg") )
     
+        
+        //Teste - tirar
+        UserConnect = defaultUser.objectForKey("UserConnect") as! NSString?
     }
 
+    @IBAction func ChangeUser(sender: AnyObject) {
+        
+        self.addAlertUser()
+        
+    }
     
     
     override func viewDidAppear(animated: Bool) {
@@ -39,7 +49,10 @@ class TableViewController: UITableViewController {
         if isFirstAccess == nil
         {
             self.addAlertUser()
+            
         }
+        
+        
         
     }
     
@@ -77,34 +90,15 @@ class TableViewController: UITableViewController {
             
             
             
-            if self.MyTextField.text == "" {
+            if self.MyTextField!.text == "" {
                 self.addAlertErro()
             }
             else{
+                self.defaultUser.setValue(self.MyTextField?.text, forKey: "UserConnect")
                 self.defaults.setValue(1, forKey: "isFirstAccess")
-                //self.defaults.setValue("false", forKey: "isFirstAccess")
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                
-                let managedContext = appDelegate.managedObjectContext!
-                
-                let entity = NSEntityDescription.entityForName("User", inManagedObjectContext: managedContext)
-                
-                self.person = NSManagedObject(entity: entity!,
-                    insertIntoManagedObjectContext:managedContext)
-                
-                //3
-               self.person!.setValue(self.MyTextField.text, forKey: "name")
                 self.tableView.reloadData()
-                
-                
-                //4
-                var error: NSError?
-                if !managedContext.save(&error) {
-                    println("Could not save \(error), \(error?.userInfo)")
-                }  
-                //5
-               // self.people.append(person)
-                
+                self.UserConnect = self.defaultUser.objectForKey("UserConnect") as! NSString?
+ 
             }
 
             
@@ -131,7 +125,7 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 10
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
       //  return teste!.count
@@ -149,9 +143,13 @@ class TableViewController: UITableViewController {
         //cell.textLabel?.text = teste[indexPath.row] as? String
         
         //let person = people[indexPath.row]
-        self.UserName = self.person?.valueForKey("name") as? String
-        print(self.UserName)
-        cell.textLabel?.text = self.person?.valueForKey("name") as? String
+//        self.UserName = self.person?.valueForKey("name") as? String
+//        print(self.UserName)
+//        cell.textLabel?.text = self.person?.valueForKey("name") as? String
+        println(self.UserConnect)
+        
+        cell.textLabel?.text = "\(UserConnect)"
+        
 
         return cell
     }
