@@ -15,32 +15,56 @@ class Webservice: NSObject {
    
 //    var user = ""
     
-    func getJSON(urlToRequest: String) -> NSData{
-        return NSData(contentsOfURL: NSURL(string: urlToRequest)!)!
-    }
-    
-    func parseJSON(inputData: NSData) -> NSDictionary{
-        var error: NSError?
-        var dic: NSDictionary = NSJSONSerialization.JSONObjectWithData(inputData, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
+    func getJSONData(urlToRequest: String) -> AnyObject{
+        //var data = NSData(contentsOfURL: NSURL(string: urlToRequest)!)!
         
-        return dic
+        let conn = Connection()
+        conn.connect(urlToRequest)
+        var data = conn.data
+        
+        var error: NSError?
+        var dic: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &error)// as! Array<NSDictionary>
+        return dic!
     }
     
-    func getUserRepos (user: String) -> NSDictionary{
+
+    //retorna um array com os dados de cada repositório do mackmobile que foi dado fork
+    func getMackmobileForks (user: String) -> Array<NSDictionary>{
         
         var error: NSError
-        let url = String(
-            format: "https://api.github.com/users/%@/repos", user) //Trocar
-        let json: NSData = getJSON(url)
-        let dic: NSDictionary = parseJSON(json)
+        //let userUrl = String(
+          //  format: "https://api.github.com/users/%@/repos", user) //Trocar
+        let userUrl = "https://api.github.com/users/\(user)/repos"
+        let userDic = getJSONData(userUrl) as! Array<NSDictionary>
         
 //        if (error != nil) {
 //            println("Não foi possível fazer a busca. ERRO: %@", error);
 //            return nil
 //        }
         
-        return dic
+        var repos:Array<NSDictionary> = []
+        
+        //get the repositories pages
+        //for (key, value) in userDic { //para cada repo
+          for repo in userDic {
+            //let repo = value as! NSDictionary
+            let repoUrl: String = repo.objectForKey("url") as! String
+            
+            //Segundo acesso
+            let repoDic = getJSONData(repoUrl) as! NSDictionary
+            
+            let parentOwner = repoDic.objectForKey("parent")?.objectForKey("owner")?.objectForKey("login")
+            
+            if (parentOwner != nil && parentOwner?.isEqual("mackmobile") != nil) {
+                repos.append(repo)
+            }
+        }
+        return repos
     }
+    
+//    func getUserData -> User
+    
+//    func getRepoData -> Repository
     
     
     

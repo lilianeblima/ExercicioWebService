@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         //pegar e mostrar labels
     }
 
-
+    
     
    
 }
