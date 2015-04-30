@@ -9,7 +9,7 @@
 import UIKit
 
 class Webservice: NSObject {
-    
+    /*
     static let sharedInstance:Webservice = Webservice()     //Singleton
     //private init() { }
    
@@ -61,7 +61,7 @@ class Webservice: NSObject {
         }
         return repos
     }
-    
+    */
 //    func getUserData -> User
     
 //    func getRepoData -> Repository

@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../Labels.swift">
+   </FileRef>
+   <FileRef
+      location = "group:../Repository.swift">
+   </FileRef>
+   <FileRef
       location = "self:ExercicioWebService.xcodeproj">
    </FileRef>
 </Workspace>
