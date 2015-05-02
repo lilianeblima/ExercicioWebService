@@ -30,14 +30,15 @@ class TableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         
-        
+        /// Teste - tirar
         let ws = Webservice()
-        print (ws.getRepoArray("JHPG"))     //Case sensitive
+        let repos: Array<RepositoryObject> = ws.getRepoArray("JHPG")
+        print (repos)     //Case sensitive (arrumar)
         
         
         
         
-        //Teste - tirar
+        /// Teste - tirar
         UserConnect = defaultUser.objectForKey("UserConnect") as! NSString?
         
         self.title = self.UserConnect as? String
