@@ -98,6 +98,9 @@ class Webservice: NSObject {
             repo.name = repoName
             repo.descrip = repoDic.objectForKey("description") as? String
             
+            /// Saber se tem pulls (flag)
+            var temPull = false
+            
             // Se tiver pull requests
             if let pulls = getJSONData( "https://api.github.com/repos/mackmobile/\(repoName)/pulls") as? Array<NSDictionary>{
                 for pullReq in pulls {
@@ -108,10 +111,13 @@ class Webservice: NSObject {
                         let issue = getJSONData((pullReq.objectForKey("issue_url") as! String)) as! NSDictionary
                         issue.setValue(repo, forKey: "repoTemp")
                         issueArray.append(issue)
+                        temPull = true
                     }
                 }
-                var issue = ["repoTemp": repo]
-                issueArray.append(issue)
+                if !temPull {
+                    var issue = ["repoTemp": repo]
+                    issueArray.append(issue)
+                }
             } else {
                 var issue = ["repoTemp": repo]
                 issueArray.append(issue)
