@@ -123,8 +123,6 @@ class TableViewController: UITableViewController {
                         for var i = 0; i < self.repositories.count; ++i
                         {
                             self.SaveRepositoryCoreData(self.repositories[i])
-                           // self.SaveLabelsCoreData(self.repositories[i])
-                            //arrayWeb[i]
                             
                         }
                        
@@ -148,23 +146,27 @@ class TableViewController: UITableViewController {
   //Salva o objeto repositorio que vem da WEB no CoreData
     func SaveRepositoryCoreData(repositoryWeb:RepositoryObject){
         var reposi = RepositoryManager.sharedInstance.newRepository()
-        
         reposi.name = repositoryWeb.name!
-        
         //reposi.parent = repositoryWeb.parent!
+        //Salva as labels
+        self.SaveLabelsCoreData(repositoryWeb, repositoryCoreData: reposi)
         RepositoryManager.sharedInstance.save()
         repositoriesCoreData = RepositoryManager.sharedInstance.getRepository()
     }
     
-    func SaveLabelsCoreData(repositoryWeb:RepositoryObject)
+    func SaveLabelsCoreData(repositoryWeb:RepositoryObject, repositoryCoreData:Repositoryy)
     {
-        //var label:LabelObject
         for label in repositoryWeb.labels {
             var labelC = LabelsManager.sharedInstance.newLabel()
-            
             labelC.name = label.name!
             labelC.color = label.color!
+            labelC.repository = repositoryCoreData
+            LabelsManager.sharedInstance.save()
+            labelsCoreData = LabelsManager.sharedInstance.getLabel()
+            
         }
+        
+        
     }
     
    
@@ -194,18 +196,6 @@ class TableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
 
-        // Configure the cell...
-       //x var i: NSInteger
-        //i = indexPath.row
-        
-        //cell.textLabel?.text = teste[indexPath.row] as? String
-        
-        //let person = people[indexPath.row]
-//        self.UserName = self.person?.valueForKey("name") as? String
-//        print(self.UserName)
-//        cell.textLabel?.text = self.person?.valueForKey("name") as? String
-//        cell.textLabel?.text = UserConnect as? String
-        
         
         /// Repositório da célula
         //let repo:RepositoryObject = repositories[indexPath.row]
@@ -218,10 +208,7 @@ class TableViewController: UITableViewController {
         cell.textLabel!.text = repoCoreData.name
         //cell.textLabel!.text = "tem linha"
         
-        
-        //self.UserName = self.person?.valueForKey("name") as? String
-        //        print(self.UserName)
-        //        cell.textLabel?.text = self.person?.valueForKey("name") as? String
+
         
         
 
