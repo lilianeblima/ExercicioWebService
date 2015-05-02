@@ -115,10 +115,11 @@ class TableViewController: UITableViewController {
                 self.UserConnect = self.defaultUser.objectForKey("UserConnect") as! NSString?
                 
                 //Buscas na Web
+                RepositoryManager.sharedInstance.deleteAll()
                 if let user = self.UserConnect as? String {
                     if let repos: Array<RepositoryObject> = self.ws.getRepoArray (user) {
                         self.repositories = repos
-                   //     RepositoryManager.sharedInstance.deleteAll()
+                        
                         //Salva no banco de dados
                         for repository in self.repositories {
                             self.SaveRepositoryCoreData(repository)
