@@ -22,6 +22,14 @@ class TableViewController: UITableViewController {
     var repositories = Array<RepositoryObject>()
     let ws = Webservice()
     
+    lazy var repositoriesCoreData:Array<Repositoryy> = {
+        return RepositoryManager.sharedInstance.getRepository()
+        }()
+    
+    lazy var labelsCoreData:Array<Labels> = {
+        return LabelsManager.sharedInstance.getLabel()
+        }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,11 +53,11 @@ class TableViewController: UITableViewController {
         self.title = self.UserConnect as? String
         
         
-        if let user = UserConnect as? String {
-            if let repos: Array<RepositoryObject> = ws.getRepoArray (user) {
-                self.repositories = repos
-            }
-        }
+//        if let user = UserConnect as? String {
+//            if let repos: Array<RepositoryObject> = ws.getRepoArray (user) {
+//                self.repositories = repos
+//            }
+//        }
         
     }
 
@@ -60,6 +68,10 @@ class TableViewController: UITableViewController {
     
     
     override func viewDidAppear(animated: Bool) {
+//Le o CoreData quando inicia o aplicativo e recarrega a tabela
+        repositoriesCoreData = RepositoryManager.sharedInstance.getRepository()
+        self.tableView.reloadData()
+//Verifica se é o primeiro acesso para enviar a mensagem de inserir usuario
         var isFirstAccess: Int? = defaults.objectForKey("isFirstAccess") as! Int?
         if isFirstAccess == nil
         {
@@ -69,50 +81,53 @@ class TableViewController: UITableViewController {
         println(self.UserConnect)
     }
     
+// Funcoes que geram os alertas
     func addAlertErro()
     {
         let alert:UIAlertController = UIAlertController(title: "Erro", message: "Por Favor, insira o user desejado", preferredStyle: .Alert)
-        
-        
         let action1:UIAlertAction = UIAlertAction(title: "OK", style: .Default) {action -> Void in
             self.addAlertUser()
-            
         }
-        
         alert.addAction(action1)
-        
         self.presentViewController(alert, animated: true, completion: {
-            
         })
     }
-    
-    var person:NSManagedObject?
     
     func addAlertUser()
     {
         let alert:UIAlertController = UIAlertController(title: "Pesquisa de usuário", message: "Por Favor, insira o user desejado", preferredStyle: .Alert)
-        
         alert.addTextFieldWithConfigurationHandler{
             textField -> Void in
             self.MyTextField = textField
         }
         
         let action1:UIAlertAction = UIAlertAction(title: "OK", style: .Default) {action -> Void in
-            
-            
-            
             if self.MyTextField!.text == "" {
                 self.addAlertErro()
             }
             else{
+            //Caso Pressione OK e esteja com nome de usuario preenchido
+                
+                //Configuracoes para indicar que ja passou a primeira vez
                 self.defaultUser.setValue(self.MyTextField?.text, forKey: "UserConnect")
                 self.defaults.setValue(1, forKey: "isFirstAccess")
                 self.tableView.reloadData()
                 self.UserConnect = self.defaultUser.objectForKey("UserConnect") as! NSString?
                 
+                //Buscas na Web
                 if let user = self.UserConnect as? String {
                     if let repos: Array<RepositoryObject> = self.ws.getRepoArray (user) {
                         self.repositories = repos
+                   //     RepositoryManager.sharedInstance.deleteAll()
+                        //Salva no banco de dados
+                        for var i = 0; i < self.repositories.count; ++i
+                        {
+                            self.SaveRepositoryCoreData(self.repositories[i])
+                           // self.SaveLabelsCoreData(self.repositories[i])
+                            //arrayWeb[i]
+                            
+                        }
+                       
                     }
                 }
                 self.tableView.reloadData()
@@ -125,11 +140,39 @@ class TableViewController: UITableViewController {
         }
         
         alert.addAction(action1)
-        
         self.presentViewController(alert, animated: true, completion: {
             
         })
     }
+    
+  //Salva o objeto repositorio que vem da WEB no CoreData
+    func SaveRepositoryCoreData(repositoryWeb:RepositoryObject){
+        var reposi = RepositoryManager.sharedInstance.newRepository()
+        
+        reposi.name = repositoryWeb.name!
+        
+        
+        //reposi.parent = repositoryWeb.parent!
+        RepositoryManager.sharedInstance.save()
+        repositoriesCoreData = RepositoryManager.sharedInstance.getRepository()
+    }
+    
+    func SaveLabelsCoreData(repositoryWeb:RepositoryObject)
+    {
+        
+//        var label2:LabelObject
+//        for var i = 0; i < repositoryWeb.labels?.count; ++i
+//        {
+//            var labelC = LabelsManager.sharedInstance.newLabel()
+//            
+//            label2 = repositoryWeb.labels[i]
+//            labelC.name = label2.name!
+//            labelC.color = label2.color!
+//        }
+//        
+    }
+    
+   
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -145,7 +188,7 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return repositories.count
+        return repositoriesCoreData.count
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
       //  return teste!.count
@@ -170,8 +213,15 @@ class TableViewController: UITableViewController {
         
         
         /// Repositório da célula
-        let repo:RepositoryObject = repositories[indexPath.row]
-        cell.textLabel!.text = repo.name
+        //let repo:RepositoryObject = repositories[indexPath.row]
+        let repoCoreData:Repositoryy = repositoriesCoreData[indexPath.row]
+      //  self.SaveRepositoryCoreData(repo)
+        
+      //  let repoCoreData:Repositoryy = repositoriesCoreDara[indexPath.row]
+       // cell.textLabel!.text = repoCoreData.name
+          //  repo.name
+        cell.textLabel!.text = repoCoreData.name
+        //cell.textLabel!.text = "tem linha"
         
         
         //self.UserName = self.person?.valueForKey("name") as? String
