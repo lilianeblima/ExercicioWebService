@@ -19,6 +19,8 @@ class TableViewController: UITableViewController {
     var UserName: NSString?
     var teste: NSMutableArray!
     var people = [NSManagedObject]()
+    var repositories = Array<RepositoryObject>()
+    let ws = Webservice()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,25 +32,30 @@ class TableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         
-        /// Teste - tirar
-        let ws = Webservice()
-        let repos: Array<RepositoryObject> = ws.getRepoArray("JHPG")
-        print (repos)     //Case sensitive (arrumar)
+        
+        
+        //let repos: Array<RepositoryObject> = ws.getRepoArray("JHPG")
+        
         
         
         
         
         /// Teste - tirar
         UserConnect = defaultUser.objectForKey("UserConnect") as! NSString?
-        
         self.title = self.UserConnect as? String
-
+        
+        
+        if let user = UserConnect as? String {
+            if let repos: Array<RepositoryObject> = ws.getRepoArray (user) {
+                self.repositories = repos
+            }
+        }
+        
     }
 
     @IBAction func ChangeUser(sender: AnyObject) {
         
         self.addAlertUser()
-        
     }
     
     
@@ -59,6 +66,7 @@ class TableViewController: UITableViewController {
             self.addAlertUser()
         }
         
+        println(self.UserConnect)
     }
     
     func addAlertErro()
@@ -70,7 +78,6 @@ class TableViewController: UITableViewController {
             self.addAlertUser()
             
         }
-        
         
         alert.addAction(action1)
         
@@ -103,6 +110,13 @@ class TableViewController: UITableViewController {
                 self.tableView.reloadData()
                 self.UserConnect = self.defaultUser.objectForKey("UserConnect") as! NSString?
                 
+                if let user = self.UserConnect as? String {
+                    if let repos: Array<RepositoryObject> = self.ws.getRepoArray (user) {
+                        self.repositories = repos
+                    }
+                }
+                self.tableView.reloadData()
+                
                 self.title = self.UserConnect as? String
  
             }
@@ -131,7 +145,7 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return repositories.count
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
       //  return teste!.count
@@ -152,9 +166,18 @@ class TableViewController: UITableViewController {
 //        self.UserName = self.person?.valueForKey("name") as? String
 //        print(self.UserName)
 //        cell.textLabel?.text = self.person?.valueForKey("name") as? String
-        println(self.UserConnect)
+//        cell.textLabel?.text = UserConnect as? String
         
-        cell.textLabel?.text = UserConnect as? String
+        
+        /// Repositório da célula
+        let repo:RepositoryObject = repositories[indexPath.row]
+        cell.textLabel!.text = repo.name
+        
+        
+        //self.UserName = self.person?.valueForKey("name") as? String
+        //        print(self.UserName)
+        //        cell.textLabel?.text = self.person?.valueForKey("name") as? String
+        
         
 
         return cell

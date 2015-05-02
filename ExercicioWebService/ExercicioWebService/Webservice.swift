@@ -114,7 +114,7 @@ class Webservice: NSObject {
     }
     
 /// Array de objetos Repository (apenas forks do mackmobile)
-    func getRepoArray(user: String) -> Array<RepositoryObject> {
+    func getRepoArray(user: String) -> Array<RepositoryObject>? {
         
         var repoArray = Array<RepositoryObject>()
         
@@ -132,7 +132,7 @@ class Webservice: NSObject {
             repo.comments = repoDic.objectForKey("comments") as? String
             repo.state = repoDic.objectForKey("state") as? String
             
-            if let tempLabelsArray = repoDic.objectForKey("labels") as? Array<NSDictionary>{
+            if let tempLabelsArray = repoDic.objectForKey("labels") as? Array<NSDictionary> {
                 var labelsArray = Array<LabelObject>()
                 
                 for tempLabel in tempLabelsArray {
