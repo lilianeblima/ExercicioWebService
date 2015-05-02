@@ -151,7 +151,6 @@ class TableViewController: UITableViewController {
         
         reposi.name = repositoryWeb.name!
         
-        
         //reposi.parent = repositoryWeb.parent!
         RepositoryManager.sharedInstance.save()
         repositoriesCoreData = RepositoryManager.sharedInstance.getRepository()
@@ -159,17 +158,13 @@ class TableViewController: UITableViewController {
     
     func SaveLabelsCoreData(repositoryWeb:RepositoryObject)
     {
-        
-//        var label2:LabelObject
-//        for var i = 0; i < repositoryWeb.labels?.count; ++i
-//        {
-//            var labelC = LabelsManager.sharedInstance.newLabel()
-//            
-//            label2 = repositoryWeb.labels[i]
-//            labelC.name = label2.name!
-//            labelC.color = label2.color!
-//        }
-//        
+        //var label:LabelObject
+        for label in repositoryWeb.labels {
+            var labelC = LabelsManager.sharedInstance.newLabel()
+            
+            labelC.name = label.name!
+            labelC.color = label.color!
+        }
     }
     
    

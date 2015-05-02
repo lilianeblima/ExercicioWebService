@@ -18,7 +18,7 @@ class RepositoryObject: NSObject {
     var comments: String?
     var state: String?
     //var labels: String?
-    var labels: Array<LabelObject>?
+    var labels = Array<LabelObject>()
    
 }
 
