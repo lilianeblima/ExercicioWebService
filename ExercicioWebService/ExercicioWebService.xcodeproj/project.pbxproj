@@ -24,7 +24,6 @@
 		D643CE761AF27A990010E7F1 /* RepositoryObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112A92A61AF24A10007E615E /* RepositoryObject.swift */; };
 		D66409981AF49383009432CF /* LabelObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66409971AF49383009432CF /* LabelObject.swift */; };
 		D68D50D71AEFA884008CD64F /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68D50D61AEFA884008CD64F /* Webservice.swift */; };
-		D6FF3E871AF0FD3B00CA1BE6 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FF3E861AF0FD3B00CA1BE6 /* Connection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +58,6 @@
 		D643CE741AF27A610010E7F1 /* Labels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
 		D66409971AF49383009432CF /* LabelObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelObject.swift; sourceTree = "<group>"; };
 		D68D50D61AEFA884008CD64F /* Webservice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
-		D6FF3E861AF0FD3B00CA1BE6 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +112,6 @@
 				0294BD8B1AEE6A8100BF3C98 /* LaunchScreen.xib */,
 				0294BD811AEE6A8100BF3C98 /* ExercicioWebService.xcdatamodeld */,
 				0294BD7D1AEE6A8100BF3C98 /* Supporting Files */,
-				D6FF3E861AF0FD3B00CA1BE6 /* Connection.swift */,
 			);
 			path = ExercicioWebService;
 			sourceTree = "<group>";
@@ -287,7 +284,6 @@
 				0294BD851AEE6A8100BF3C98 /* ViewController.swift in Sources */,
 				1148E13E1AF2C91200283E68 /* Repositoryy.swift in Sources */,
 				1148E1451AF2CA2400283E68 /* RepositoryyManager.swift in Sources */,
-				D6FF3E871AF0FD3B00CA1BE6 /* Connection.swift in Sources */,
 				0294BD831AEE6A8100BF3C98 /* ExercicioWebService.xcdatamodeld in Sources */,
 				D643CE761AF27A990010E7F1 /* RepositoryObject.swift in Sources */,
 				D68D50D71AEFA884008CD64F /* Webservice.swift in Sources */,

@@ -29,13 +29,13 @@ class TableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-//        let ws = Webservice()
-//        print( ws.getRepoArray("JHPG"))
-
-        let conn = Connection()
-        conn.connect("https://api.github.com/users/jhpg/repos")
-        let json = NSJSONSerialization.JSONObjectWithData(conn.data!, options: NSJSONReadingOptions.MutableContainers, error:nil) as! [NSDictionary]
-        println(json)
+        
+        
+        let ws = Webservice()
+        print (ws.getRepoArray("JHPG"))     //Case sensitive
+        
+        
+        
         
         //Teste - tirar
         UserConnect = defaultUser.objectForKey("UserConnect") as! NSString?

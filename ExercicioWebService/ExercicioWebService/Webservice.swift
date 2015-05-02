@@ -10,57 +10,57 @@ import UIKit
 
 class Webservice: NSObject {
     
+    /// Singleton
     static let sharedInstance:Webservice = Webservice()     //Singleton
-    //var repoArray: Array = Array<Repository>()
     
     //private init() { }
    
-//    var user = ""
+/// Retorna o NSData da url já autenticado (síncrono)
+    func getData (url: String) -> NSData? {
+        // set up the base64-encoded credentials
+        let username = "webserviceGit"
+        let password = "webserviceGit123"
+        let loginString = NSString(format: "%@:%@", username, password)
+        let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
+        let base64LoginString = loginData.base64EncodedStringWithOptions(nil)
+        
+        // create the request
+        let url2 = NSURL(string: url)
+        let request = NSMutableURLRequest(URL: url2!)
+        request.HTTPMethod = "GET"
+        request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+        
+        var response: NSURLResponse?; var error: NSError?
+        let data: NSData? = NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: &error)
+        return data
+    }
     
+/// Retorna os dados JSON de uma URL (String)
     func getJSONData(urlToRequest: String) -> AnyObject?{
         
+        /// Objeto de retorno
+        var dic: AnyObject?
         
-        var data = NSData()
-        
-        if let url = NSURL(string: urlToRequest) {
-            if let data2 = NSData(contentsOfURL: url) {  // may return nil, too
-                data = data2
-            } else {
-                println("Não foi possível ler o valor NSData da url passada (já excedeu o limite do GitHub)")
-            }
+        if let data = getData(urlToRequest) {  // may return nil, too
+            
+            var error: NSError?
+            dic = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &error)
+            
+        } else {
+            println("Não foi possível ler o valor NSData da url passada (já excedeu o limite do GitHub)")
         }
-
-        
-//        let conn = Connection()
-//        conn.connect(urlToRequest)
-//        var data4 = conn.data
-        
-        //JSONService.GET( NSURL(fileURLWithPath: urlToRequest)!, user: "webserviceGit", pass: "webserviceGit123").success(teste, queue: nil)
-        
-        
-        var error: NSError?
-        let dic: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &error)
         return dic
     }
     
-//    func teste (json:AnyObject){
-//        var data = json as! NSDictionary
-//        println(data)
-//    }
-    
 
-    ///retorna um array com os dados de cada repositório do mackmobile que foi dado fork
+/// Retorna um array com os dados de cada repositório do mackmobile que foi dado fork
     func getMackmobileForks (user: String) -> Array<NSDictionary>{
         
         var error: NSError
         let userUrl = "https://api.github.com/users/\(user)/repos"
         let userDic = getJSONData(userUrl) as! Array<NSDictionary>
         
-//        if (error != nil) {
-//            println("Não foi possível fazer a busca. ERRO: %@", error);
-//            return nil
-//        }
-        
+        /// Array de dicionários com os repositórios fork
         var repos:Array<NSDictionary> = []
         
         //get the repositories pages
@@ -68,7 +68,7 @@ class Webservice: NSObject {
             //let repo = value as! NSDictionary
             let repoUrl: String = repo.objectForKey("url") as! String
             
-            //Segundo acesso
+            /// Segundo acesso
             let repoDic = getJSONData(repoUrl) as! NSDictionary
             
             if let parentOwner:String = repoDic.objectForKey("parent")?.objectForKey("owner")?.objectForKey("login") as? String{
@@ -78,12 +78,12 @@ class Webservice: NSObject {
                 }
             }
         }
-        return repos    //Array de dicionários com os repositórios fork
+        return repos
     }
     
 //    func getUserData (String user) -> User
     
-    /// Array de dictionary da página de issues do GitHub
+/// Array de dictionary da página de issues do GitHub
     func genIssueArray (user: String) -> Array<NSDictionary>{
         
         let repoDics: Array<NSDictionary> = getMackmobileForks(user)
@@ -113,7 +113,7 @@ class Webservice: NSObject {
         return issueArray
     }
     
-    /// Array de objetos Repository (apenas forks do mackmobile)
+/// Array de objetos Repository (apenas forks do mackmobile)
     func getRepoArray(user: String) -> Array<RepositoryObject> {
         
         var repoArray = Array<RepositoryObject>()
