@@ -120,10 +120,8 @@ class TableViewController: UITableViewController {
                         self.repositories = repos
                    //     RepositoryManager.sharedInstance.deleteAll()
                         //Salva no banco de dados
-                        for var i = 0; i < self.repositories.count; ++i
-                        {
-                            self.SaveRepositoryCoreData(self.repositories[i])
-                            
+                        for repository in self.repositories {
+                            self.SaveRepositoryCoreData(repository)
                         }
                        
                     }

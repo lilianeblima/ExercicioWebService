@@ -92,23 +92,31 @@ class Webservice: NSObject {
         for repoDic in repoDics {
             //let pulls: AnyObject = getJSONData( (repoDic.objectForKey("pulls_url") as! String) )
             let repoName = repoDic.objectForKey("name") as! String
-            let pulls = getJSONData( "https://api.github.com/repos/mackmobile/\(repoName)/pulls") as! Array<NSDictionary>
             
-            //Temp object - é passado junto com a issue como value
+            /// Temp object - é passado junto com a issue como value
             var repo = RepositoryObject()
             repo.name = repoName
             repo.descrip = repoDic.objectForKey("description") as? String
             
-            for pullReq in pulls {
-                
-                let pullUser = pullReq.objectForKey("user")?.objectForKey("login") as? String
-                //Se o usuário for o que deu pull
-                if (pullUser == user) {
-                    let issue = getJSONData((pullReq.objectForKey("issue_url") as! String)) as! NSDictionary
-                    issue.setValue(repo, forKey: "repoTemp")
-                    issueArray.append(issue)
+            // Se tiver pull requests
+            if let pulls = getJSONData( "https://api.github.com/repos/mackmobile/\(repoName)/pulls") as? Array<NSDictionary>{
+                for pullReq in pulls {
+                    
+                    let pullUser = pullReq.objectForKey("user")?.objectForKey("login") as? String
+                    //Se o usuário for o que deu pull
+                    if (pullUser == user) {
+                        let issue = getJSONData((pullReq.objectForKey("issue_url") as! String)) as! NSDictionary
+                        issue.setValue(repo, forKey: "repoTemp")
+                        issueArray.append(issue)
+                    }
                 }
+                var issue = ["repoTemp": repo]
+                issueArray.append(issue)
+            } else {
+                var issue = ["repoTemp": repo]
+                issueArray.append(issue)
             }
+            
         }
         return issueArray
     }
