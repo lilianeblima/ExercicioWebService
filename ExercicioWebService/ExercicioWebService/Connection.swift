@@ -10,9 +10,11 @@ import UIKit
 
 class Connection: NSObject, NSURLConnectionDelegate{
    
-    var data: NSData = NSData()
+    var data: NSData?
+    var response: NSURLResponse?
+    var error: NSError?
     
-    func connect (url: String) {
+    func getData (url: String) {
         // set up the base64-encoded credentials
         let username = "webserviceGit"
         let password = "webserviceGit123"
@@ -28,21 +30,32 @@ class Connection: NSObject, NSURLConnectionDelegate{
         
         // fire off the request
         // make sure your class conforms to NSURLConnectionDelegate
-        let urlConnection = NSURLConnection(request: request, delegate: self, startImmediately: true)
-        urlConnection?.start()
+        //let urlConnection = NSURLConnection(request: request, delegate: self, startImmediately: true)
+        
+        
+        self.data = NSURLConnection.sendSynchronousRequest(request, returningResponse: &self.response, error: &self.error)
     }
     
     
-    //NSURLConnection delegate method
-    func connection(connection: NSURLConnection, didFailWithError error: NSError) {
-        println("Failed with error:\(error.localizedDescription)")
-    }
+//    
+//    func send(url: String, f: (String)-> ()) {
+//        var request = NSURLRequest(URL: NSURL(string: url)!)
+//        var response: NSURLResponse?
+//        var error: NSErrorPointer = nil
+//        var data = NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: error)
+//        var reply = NSString(data: data!, encoding: NSUTF8StringEncoding)
+//        f(reply)
+//    }
+
     
-    //NSURLConnection delegate method
-    func connection(didReceiveResponse: NSURLConnection!, didReceiveResponse response: NSURLResponse!) {
-        println("recebido")
-        //New request so we need to clear the data object
-        //self.data = NSMutableData()
+    
+    
+    
+    
+    func connection(connection:NSURLConnection!, didReceiveResponse response: NSURLResponse) {
+        let status = (response as! NSHTTPURLResponse).statusCode
+        println("status code is \(status)")
+        // 200? Yeah authentication was successful
     }
     
     //NSURLConnection delegate method
@@ -55,8 +68,11 @@ class Connection: NSObject, NSURLConnectionDelegate{
     func connectionDidFinishLoading(connection: NSURLConnection!) {
         NSLog("connectionDidFinishLoading");
     }
+    
+    //NSURLConnection delegate method
+    func connection(connection: NSURLConnection, didFailWithError error: NSError) {
+        println("Failed with error:\(error.localizedDescription)")
+    }
+    
 
-    
-    
-    
 }

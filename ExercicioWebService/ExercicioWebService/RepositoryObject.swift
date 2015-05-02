@@ -1,5 +1,5 @@
 //
-//  Repository.swift
+//  RepositoryObject.swift
 //  ExercicioWebService
 //
 //  Created by Liliane Bezerra Lima on 30/04/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Repository: NSObject {
+class RepositoryObject: NSObject {
     
     var parent:NSString?
     var name: NSString?
@@ -18,7 +18,7 @@ class Repository: NSObject {
     var comments: String?
     var state: String?
     //var labels: NSString!
-    var labels: Array<Labels>?
+    var labels: Array<LabelObject>?
    
 }
 

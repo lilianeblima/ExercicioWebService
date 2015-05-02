@@ -9,7 +9,7 @@
 import UIKit
 
 class Webservice: NSObject {
- /*
+    
     static let sharedInstance:Webservice = Webservice()     //Singleton
     //var repoArray: Array = Array<Repository>()
     
@@ -17,20 +17,30 @@ class Webservice: NSObject {
    
 //    var user = ""
     
-    func getJSONData(urlToRequest: String) -> AnyObject{
+    func getJSONData(urlToRequest: String) -> AnyObject?{
         
-        let data = NSData(contentsOfURL: NSURL(string: urlToRequest)!)!
+        
+        var data = NSData()
+        
+        if let url = NSURL(string: urlToRequest) {
+            if let data2 = NSData(contentsOfURL: url) {  // may return nil, too
+                data = data2
+            } else {
+                println("Não foi possível ler o valor NSData da url passada (já excedeu o limite do GitHub)")
+            }
+        }
+
         
 //        let conn = Connection()
 //        conn.connect(urlToRequest)
-//        var data = conn.data
+//        var data4 = conn.data
         
         //JSONService.GET( NSURL(fileURLWithPath: urlToRequest)!, user: "webserviceGit", pass: "webserviceGit123").success(teste, queue: nil)
         
         
         var error: NSError?
         let dic: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &error)
-        return dic!
+        return dic
     }
     
 //    func teste (json:AnyObject){
@@ -39,7 +49,7 @@ class Webservice: NSObject {
 //    }
     
 
-    //retorna um array com os dados de cada repositório do mackmobile que foi dado fork
+    ///retorna um array com os dados de cada repositório do mackmobile que foi dado fork
     func getMackmobileForks (user: String) -> Array<NSDictionary>{
         
         var error: NSError
@@ -61,10 +71,11 @@ class Webservice: NSObject {
             //Segundo acesso
             let repoDic = getJSONData(repoUrl) as! NSDictionary
             
-            let parentOwner = repoDic.objectForKey("parent")?.objectForKey("owner")?.objectForKey("login") as? String
-            
-            if (parentOwner != nil && parentOwner?.isEqual("mackmobile") != nil) { //Se for um fork do mackmobile
-                repos.append(repo)
+            if let parentOwner:String = repoDic.objectForKey("parent")?.objectForKey("owner")?.objectForKey("login") as? String{
+                //Verifica na variável criada se é nula
+                if parentOwner.isEqual("mackmobile") { //Se for um fork do mackmobile
+                    repos.append(repo)
+                }
             }
         }
         return repos    //Array de dicionários com os repositórios fork
@@ -72,7 +83,7 @@ class Webservice: NSObject {
     
 //    func getUserData (String user) -> User
     
-    
+    /// Array de dictionary da página de issues do GitHub
     func genIssueArray (user: String) -> Array<NSDictionary>{
         
         let repoDics: Array<NSDictionary> = getMackmobileForks(user)
@@ -80,11 +91,11 @@ class Webservice: NSObject {
         
         for repoDic in repoDics {
             //let pulls: AnyObject = getJSONData( (repoDic.objectForKey("pulls_url") as! String) )
-            let repoName = repoDic.objectForKey("name") as? String
-            let pulls = getJSONData( "https://api.github.com/repos/mackmobile/\(repoName)/pulls?state=all" ) as! Array<NSDictionary>
+            let repoName = repoDic.objectForKey("name") as! String
+            let pulls = getJSONData( "https://api.github.com/repos/mackmobile/\(repoName)/pulls") as! Array<NSDictionary>
             
             //Temp object - é passado junto com a issue como value
-            var repo = Repository()
+            var repo = RepositoryObject()
             repo.name = repoName
             repo.descrip = repoDic.objectForKey("description") as? String
             
@@ -99,54 +110,43 @@ class Webservice: NSObject {
                 }
             }
         }
-        
         return issueArray
     }
     
-    func getRepoArray(user: String) -> Array<Repository> {
+    /// Array de objetos Repository (apenas forks do mackmobile)
+    func getRepoArray(user: String) -> Array<RepositoryObject> {
         
-        var repoArray = Array<Repository>()
+        var repoArray = Array<RepositoryObject>()
         
         for repoDic in genIssueArray(user){
             
-            let repoTemp = repoDic.valueForKey("repoTemp") as! Repository
-            var repo = Repository()
+            let repoTemp = repoDic.valueForKey("repoTemp") as! RepositoryObject
+            var repo = RepositoryObject()
             
             repo.name = repoTemp.name
             repo.descrip = repoTemp.descrip
             repo.pullUrl = repoDic.objectForKey("html_url") as? String
-            repo.milestone = repoDic.objectForKey("milestone")?.objectForKey("title") as? String
+            if let milestone = repoDic.objectForKey("milestone") as? NSDictionary {
+                repo.milestone = milestone.objectForKey("title") as? String
+            }
             repo.comments = repoDic.objectForKey("comments") as? String
             repo.state = repoDic.objectForKey("state") as? String
             
-            let tempLabelsArray = repoDic.objectForKey("labels") as! Array<NSDictionary>
-            var labelsArray = Array<Labels>()
-            
-            for tempLabel in tempLabelsArray {
-                var label = Labels()
-                label.name = tempLabel.objectForKey("name") as! String
-                label.color = tempLabel.objectForKey("color") as! String
-                label.repository = repo
+            if let tempLabelsArray = repoDic.objectForKey("labels") as? Array<NSDictionary>{
+                var labelsArray = Array<LabelObject>()
                 
-                labelsArray.append(label)
+                for tempLabel in tempLabelsArray {
+                    var label = LabelObject()
+                    label.name = tempLabel.objectForKey("name") as? String
+                    label.color = tempLabel.objectForKey("color") as? String
+                    
+                    labelsArray.append(label)
+                }
+                repo.labels = labelsArray   //Associa vetor de labels ao repositório
             }
-            
-            repo.labels = labelsArray   //Associa vetor de labels ao repositório
             repoArray.append(repo)
         }
         return repoArray
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    */
-
-    
-    
     
 }
