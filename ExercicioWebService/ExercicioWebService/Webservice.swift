@@ -99,11 +99,10 @@ class Webservice: NSObject {
             
             /// Saber se tem pulls (flag)
             var temPull = false
-            
             var i = 1
             
             //Verifica se há Pullrequests no repo
-            if let pullTest = getJSONData("https://api.github.com/repos/mackmobile/\(repo.name!)/pulls?state=all&page=\(i)") as? Array<NSDictionary>{
+            if let pullTest = getJSONData("https://api.github.com/repos/mackmobile/\(repo.name!)/pulls?page=\(i)") as? Array<NSDictionary>{
                 
                 //Armazena as páginas de busca que virá do while
                 var pulls: [NSDictionary] = pullTest
@@ -124,17 +123,17 @@ class Webservice: NSObject {
                     
                     /// executa outra vez a busca em outra página
                     i++
-                    pulls = getJSONData("https://api.github.com/repos/mackmobile/\(repo.name!)/pulls?state=all&page=\(i)") as! Array<NSDictionary>
+                    pulls = getJSONData("https://api.github.com/repos/mackmobile/\(repo.name!)/pulls?page=\(i)") as! Array<NSDictionary>
                 }
                 
                 if !temPull {
                     var issue = ["repoTemp": repo]
                     issueArray.append(issue)
                 }
-            } else {
-                var issue = ["repoTemp": repo]
-                issueArray.append(issue)
-            }
+            } // else {
+//                var issue = ["repoTemp": repo]
+//                issueArray.append(issue)
+//            }
             
         }
         return issueArray
@@ -156,6 +155,9 @@ class Webservice: NSObject {
             repo.pullUrl = repoDic.objectForKey("html_url") as? String
             if let milestone = repoDic.objectForKey("milestone") as? NSDictionary {
                 repo.milestone = milestone.objectForKey("title") as? String
+            }
+            if let assignee = repoDic.objectForKey("assignee") as? NSDictionary {
+                repo.assignee = assignee.objectForKey("login") as? String
             }
             repo.comments = repoDic.objectForKey("comments") as? String
             repo.state = repoDic.objectForKey("state") as? String
