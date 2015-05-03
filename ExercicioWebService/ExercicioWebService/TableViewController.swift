@@ -19,69 +19,155 @@ class TableViewController: UITableViewController {
     var UserName: NSString?
     var teste: NSMutableArray!
     var people = [NSManagedObject]()
+    var UserGitSettings:String?
+    var isFirstAccess: Int?
     var repositories = Array<RepositoryObject>()
     let ws = Webservice()
-    
     lazy var repositoriesCoreData:Array<Repositoryy> = {
         return RepositoryManager.sharedInstance.getRepository()
         }()
-    
     lazy var labelsCoreData:Array<Labels> = {
         return LabelsManager.sharedInstance.getLabel()
         }()
+
+
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
-        
-        
-        
-        //let repos: Array<RepositoryObject> = ws.getRepoArray("JHPG")
-        
-        
-        
-        
-        
-        /// Teste - tirar
-        UserConnect = defaultUser.objectForKey("UserConnect") as! NSString?
-        self.title = self.UserConnect as? String
-        
-        
-//        if let user = UserConnect as? String {
-//            if let repos: Array<RepositoryObject> = ws.getRepoArray (user) {
-//                self.repositories = repos
-//            }
-//        }
-        
-    }
-
+//=============================BOTAO===========================================
     @IBAction func ChangeUser(sender: AnyObject) {
         
         self.addAlertUser()
     }
     
-    
-    override func viewDidAppear(animated: Bool) {
-//Le o CoreData quando inicia o aplicativo e recarrega a tabela
-        repositoriesCoreData = RepositoryManager.sharedInstance.getRepository()
-        self.tableView.reloadData()
-//Verifica se é o primeiro acesso para enviar a mensagem de inserir usuario
-        var isFirstAccess: Int? = defaults.objectForKey("isFirstAccess") as! Int?
-        if isFirstAccess == nil
-        {
-            self.addAlertUser()
-        }
+//==================Funcoes Padroes===================================
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        UserConnect = defaultUser.objectForKey("UserConnect") as! NSString?
+        self.title = self.UserConnect as String?
+       //
+       //UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+
         
-        println(self.UserConnect)
     }
     
-// Funcoes que geram os alertas
+    override func viewDidAppear(animated: Bool) {
+
+        //Faz a leitura do CoreData e recarrega a tabela
+        repositoriesCoreData = RepositoryManager.sharedInstance.getRepository()
+        self.tableView.reloadData()
+        
+        //Seleciona um usuario
+        self.UserSelec()
+        
+    }
+
+    // MARK: - Table view data source
+
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return repositoriesCoreData.count
+
+    }
+
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+
+        let repoCoreData:Repositoryy = repositoriesCoreData[indexPath.row]
+
+        cell.textLabel!.text = repoCoreData.name
+
+
+        return cell
+    }
+    
+    func getDetails(arrayLabels: NSNotification) {
+        
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        //========Notification Center==========
+        let notif: NSNotificationCenter = NSNotificationCenter.defaultCenter()
+        
+        let repoCoreData:Repositoryy = repositoriesCoreData[indexPath.row]
+        var labs: NSDictionary = NSDictionary(object: repoCoreData.labels, forKey: "Labels")
+        
+        notif.postNotificationName("switchingViews", object: self, userInfo: labs as? [NSObject: AnyObject])
+        
+        //        var arrLabels: NSDictionary = NSDictionary(object: labels, forKey:"passInfo")
+        //        notif.postNotificationName("allLabels", obje		ct: self, userInfo: arrLabels as [NSObject: AnyObject])
+
+
+    }
+    
+//================================FUNCOES=======================================
+    
+    //===========Funcao que verifica se ja tem usuario configurado nos settings======
+    func UserSelec(){
+     //   self.AlertLoading()
+        UserGitSettings = self.defaultUser.objectForKey("userGitHub") as? String
+        if UserGitSettings == nil || UserGitSettings == ""{
+            isFirstAccess = defaults.objectForKey("isFirstAccess") as! Int?
+            if isFirstAccess == nil{
+                self.addAlertUser()
+            }
+        }
+        else{
+            if UserGitSettings != UserConnect{
+                self.UserConnect = UserGitSettings
+                self.defaultUser.setValue(self.UserConnect, forKey: "UserConnect")
+                self.SearchWEB()
+            }
+            else{
+                self.SearchWEB()
+            }
+            self.defaults.setValue(1, forKey: "isFirstAccess")
+            isFirstAccess = defaults.objectForKey("isFirstAccess") as! Int?
+            
+            
+        }
+    }
+    
+//================================Alertas======================================
+ //Alerta Principal para inserir usuario
+    func addAlertUser()
+    {
+        let alert:UIAlertController = UIAlertController(title: "Pesquisa de usuário", message: "Por Favor, insira o user desejado", preferredStyle: .Alert)
+        alert.addTextFieldWithConfigurationHandler{
+            textField -> Void in
+            self.MyTextField = textField
+        }
+        //Caso nao seja o primeiro acesso, possibilita que seja cancelado a operacao
+        if isFirstAccess != nil{
+            let cancel:UIAlertAction = UIAlertAction(title: "Cancel", style: .Default){ action -> Void in
+            }
+            alert.addAction(cancel)
+        }
+        
+        let action1:UIAlertAction = UIAlertAction(title: "OK", style: .Default) {action -> Void in
+            if self.MyTextField!.text == "" {
+                self.addAlertErro()
+            }
+            else{
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+                //Caso Pressione OK e esteja com nome de usuario preenchido
+                self.UserConnect = self.MyTextField?.text
+                
+                self.SearchWEB()
+            }
+        }
+        
+        alert.addAction(action1)
+        self.presentViewController(alert, animated: true, completion: {
+            
+        })
+    }
+    
+  //Alerta Secundário para informar que é preciso preencher o usuario
     func addAlertErro()
     {
         let alert:UIAlertController = UIAlertController(title: "Erro", message: "Por Favor, insira o user desejado", preferredStyle: .Alert)
@@ -93,59 +179,63 @@ class TableViewController: UITableViewController {
         })
     }
     
-    func addAlertUser()
+  //Alerta caso nao encontre usuário
+    func AlertUser()
     {
-        let alert:UIAlertController = UIAlertController(title: "Pesquisa de usuário", message: "Por Favor, insira o user desejado", preferredStyle: .Alert)
-        alert.addTextFieldWithConfigurationHandler{
-            textField -> Void in
-            self.MyTextField = textField
-        }
-        
+        let alert:UIAlertController = UIAlertController(title: "Erro! Usuario Invalido", message: "Verifique o usuario e tente novamente ", preferredStyle: .Alert)
         let action1:UIAlertAction = UIAlertAction(title: "OK", style: .Default) {action -> Void in
-            if self.MyTextField!.text == "" {
-                self.addAlertErro()
-            }
-            else{
-            //Caso Pressione OK e esteja com nome de usuario preenchido
-                
-                //Configuracoes para indicar que ja passou a primeira vez
-                self.defaultUser.setValue(self.MyTextField?.text, forKey: "UserConnect")
-                self.defaults.setValue(1, forKey: "isFirstAccess")
-                self.tableView.reloadData()
-                self.UserConnect = self.defaultUser.objectForKey("UserConnect") as! NSString?
-                
-                //Buscas na Web
-                if let user = self.UserConnect as? String {
-                    if let repos: Array<RepositoryObject> = self.ws.getRepoArray (user) {
-                        self.repositories = repos
-                   //     RepositoryManager.sharedInstance.deleteAll()
-                        //Salva no banco de dados
-                        for repository in self.repositories {
-                            self.SaveRepositoryCoreData(repository)
-                        }
-                       
-                    }
-                }
-                self.tableView.reloadData()
-                
-                self.title = self.UserConnect as? String
- 
-            }
-
-            
+            self.addAlertUser()
         }
-        
         alert.addAction(action1)
+        
         self.presentViewController(alert, animated: true, completion: {
-            
         })
     }
+
+//================================Buscas na WEB==================================
+    func SearchWEB(){
+        
+        
+        //Faz a busca na WEB
+        if let user = self.UserConnect as? String {
+            if let repos: Array<RepositoryObject> = self.ws.getRepoArray (user) {
+                self.repositories = repos
+                
+                //Caso nao encontre o usuário pesquisado
+                if repos.count == 0{
+                    self.AlertUser()
+                }
+                else{
+                    //Salva as informacoes
+                    self.defaultUser.setValue(self.UserConnect, forKey: "UserConnect")
+                    self.defaultUser.setValue(self.UserConnect, forKey: "userGitHub")
+                    self.defaults.setValue(1, forKey: "isFirstAccess")
+                    self.isFirstAccess = self.defaults.objectForKey("isFirstAccess") as! Int?
+                    self.tableView.reloadData()
+                    self.UserConnect = self.defaultUser.objectForKey("UserConnect") as! NSString?
+                    
+                    //Limpa o CoreData
+                    RepositoryManager.sharedInstance.deleteAll()
+                    
+                    //Salva no banco de dados
+                    for repository in self.repositories {
+                    self.SaveRepositoryCoreData(repository)
+                }
+                
+                }
+            }
+        }
+        self.tableView.reloadData()
+        self.title = self.defaultUser.objectForKey("UserConnect") as! String?
+        
+    }
     
-  //Salva o objeto repositorio que vem da WEB no CoreData
+//===================SALVANDO OBJETOS NO COREDATA===============================
+    
+        //Salva o objeto repositorio que vem da WEB no CoreData
     func SaveRepositoryCoreData(repositoryWeb:RepositoryObject){
         var reposi = RepositoryManager.sharedInstance.newRepository()
         reposi.name = repositoryWeb.name!
-        //reposi.parent = repositoryWeb.parent!
         
         //Salva as labels
         self.SaveLabelsCoreData(repositoryWeb, repositoryCoreData: reposi)
@@ -153,6 +243,7 @@ class TableViewController: UITableViewController {
         repositoriesCoreData = RepositoryManager.sharedInstance.getRepository()
     }
     
+    //Salva as Labels
     func SaveLabelsCoreData(repositoryWeb:RepositoryObject, repositoryCoreData:Repositoryy)
     {
         for label in repositoryWeb.labels {
@@ -162,120 +253,7 @@ class TableViewController: UITableViewController {
             labelC.repository = repositoryCoreData
             LabelsManager.sharedInstance.save()
             labelsCoreData = LabelsManager.sharedInstance.getLabel()
-            
         }
-        
-        
     }
-    
-   
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 1
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return repositoriesCoreData.count
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-      //  return teste!.count
-        //return 1
-    }
-
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
-
-        
-        /// Repositório da célula
-        //let repo:RepositoryObject = repositories[indexPath.row]
-        let repoCoreData:Repositoryy = repositoriesCoreData[indexPath.row]
-      //  self.SaveRepositoryCoreData(repo)
-        
-      //  let repoCoreData:Repositoryy = repositoriesCoreDara[indexPath.row]
-       // cell.textLabel!.text = repoCoreData.name
-          //  repo.name
-        cell.textLabel!.text = repoCoreData.name
-        //cell.textLabel!.text = "tem linha"
-        
-
-        
-        
-
-        return cell
-    }
-    
-    func getDetails(arrayLabels: NSNotification) {
-        
-    }
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let notif: NSNotificationCenter = NSNotificationCenter.defaultCenter()
-        
-        let repoCoreData:Repositoryy = repositoriesCoreData[indexPath.row]
-        
-        var labs: NSDictionary = NSDictionary(object: repoCoreData.labels, forKey: "Labels")
-        
-        notif.postNotificationName("switchingViews", object: self, userInfo: labs as? [NSObject: AnyObject])
-        
-//        var arrLabels: NSDictionary = NSDictionary(object: labels, forKey:"passInfo")
-//        notif.postNotificationName("allLabels", obje		ct: self, userInfo: arrLabels as [NSObject: AnyObject])
-    }
-    
-
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

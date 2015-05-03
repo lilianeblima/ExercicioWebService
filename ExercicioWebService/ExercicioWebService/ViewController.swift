@@ -11,7 +11,22 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var labelBronze1: UILabel!
+    @IBOutlet weak var labelBronze2: UILabel!
+    @IBOutlet weak var labelBronze3: UILabel!
+    @IBOutlet weak var labelBronze4: UILabel!
+    @IBOutlet weak var labelBronze5: UILabel!
+    @IBOutlet weak var labelBronze6: UILabel!
+    @IBOutlet weak var labelProbBronze: UILabel!
     
+    @IBOutlet weak var labelPrata1: UILabel!
+    @IBOutlet weak var labelPrata2: UILabel!
+    @IBOutlet weak var labelPrata3: UILabel!
+    @IBOutlet weak var labelProbPrata: UILabel!
+    
+    @IBOutlet weak var labelOuro1: UILabel!
+    @IBOutlet weak var labelOuro2: UILabel!
+    @IBOutlet weak var labelOuro3: UILabel!
+    @IBOutlet weak var labelProbOuro: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()

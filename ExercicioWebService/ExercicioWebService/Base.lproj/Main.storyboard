@@ -193,7 +193,21 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="labelBronze1" destination="jpe-G2-bP9" id="235-Lt-653"/>
+                        <outlet property="labelBronze1" destination="jpe-G2-bP9" id="JbQ-aM-LiF"/>
+                        <outlet property="labelBronze2" destination="g1N-qR-U29" id="9EG-4O-tQG"/>
+                        <outlet property="labelBronze3" destination="uSL-0B-gjn" id="e9X-3K-AJm"/>
+                        <outlet property="labelBronze4" destination="1EZ-uR-m7R" id="zRN-xM-TEk"/>
+                        <outlet property="labelBronze5" destination="UBD-xw-aVa" id="3YI-UC-wm9"/>
+                        <outlet property="labelBronze6" destination="By3-Pt-brx" id="Mmj-5R-esG"/>
+                        <outlet property="labelOuro1" destination="pwY-S8-tip" id="VH5-1m-ARW"/>
+                        <outlet property="labelOuro2" destination="krq-gp-XG3" id="8uP-vn-6yt"/>
+                        <outlet property="labelOuro3" destination="NZ4-gM-fex" id="cbZ-eL-pEw"/>
+                        <outlet property="labelPrata1" destination="fv2-GS-kUR" id="QZD-Zs-GeU"/>
+                        <outlet property="labelPrata2" destination="kYY-ob-uEV" id="ojg-6C-9Nz"/>
+                        <outlet property="labelPrata3" destination="AHg-bL-jm0" id="Ugv-qa-QXn"/>
+                        <outlet property="labelProbBronze" destination="7HV-aH-ppx" id="T4a-fL-K9S"/>
+                        <outlet property="labelProbOuro" destination="wFj-tM-NsH" id="5kH-1A-hxc"/>
+                        <outlet property="labelProbPrata" destination="WMU-bd-cxi" id="Rmj-aa-ShO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yQ5-Ti-FFZ" userLabel="First Responder" sceneMemberID="firstResponder"/>

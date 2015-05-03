@@ -19,6 +19,7 @@ class RepositoryObject: NSObject {
     var state: String?
     //var labels: String?
     var labels = Array<LabelObject>()
+    var assignee: String?
    
 }
 

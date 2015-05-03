@@ -18,34 +18,9 @@ public class RepositoryManager {
         return c!
         }()
     
+    
     private init(){}
     
-    func deleteAll()
-    {
-        let fetchRequest = NSFetchRequest(entityName: RepositoryManager.entityName)
-        var error:NSError?
-        
-        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as? [NSManagedObject]
-        
-       
-        
-        if let results = fetchedResults as? [Repositoryy] {
-            for var i = 0; i < results.count; ++i
-            {
-               managedContext.delete(results[i])
-            }
-            
-        } else {
-            println("Could not fetch. Error: \(error), \(error!.userInfo)")
-        }
-//
-//        NSFetchRequest(entityName: "FetchRequest")
-//        
-//        return Array<Repositoryy>()
-        
-        //managedContext.deleteObject(managedContext)
-        //managedContext.delete(managedContext)
-    }
     
     func newRepository()->Repositoryy
     {
@@ -79,6 +54,18 @@ public class RepositoryManager {
         
         return Array<Repositoryy>()
     }
+    
+    func deleteAll()
+    {
+        var array: Array<Repositoryy> = getRepository()
+        
+        for rep: Repositoryy in array{
+            managedContext.deleteObject(rep)
+            
+        }
+    }
+    
+    
     
     
     
