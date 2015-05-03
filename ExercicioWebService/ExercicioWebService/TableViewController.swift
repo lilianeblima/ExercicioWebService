@@ -29,7 +29,8 @@ class TableViewController: UITableViewController {
     lazy var labelsCoreData:Array<Labels> = {
         return LabelsManager.sharedInstance.getLabel()
         }()
-    
+
+
     
 
 //=============================BOTAO===========================================
@@ -42,9 +43,18 @@ class TableViewController: UITableViewController {
         super.viewDidLoad()
         UserConnect = defaultUser.objectForKey("UserConnect") as! NSString?
         self.title = self.UserConnect as String?
+       //
+       //UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+
+        
+
+        
+
+        
     }
     
     override func viewDidAppear(animated: Bool) {
+
         //Faz a leitura do CoreData e recarrega a tabela
         repositoriesCoreData = RepositoryManager.sharedInstance.getRepository()
         self.tableView.reloadData()
@@ -91,6 +101,7 @@ class TableViewController: UITableViewController {
     
     //===========Funcao que verifica se ja tem usuario configurado nos settings======
     func UserSelec(){
+     //   self.AlertLoading()
         UserGitSettings = self.defaultUser.objectForKey("userGitHub") as? String
         if UserGitSettings == nil || UserGitSettings == ""{
             isFirstAccess = defaults.objectForKey("isFirstAccess") as! Int?
@@ -102,6 +113,9 @@ class TableViewController: UITableViewController {
             if UserGitSettings != UserConnect{
                 self.UserConnect = UserGitSettings
                 self.defaultUser.setValue(self.UserConnect, forKey: "UserConnect")
+                self.SearchWEB()
+            }
+            else{
                 self.SearchWEB()
             }
             self.defaults.setValue(1, forKey: "isFirstAccess")
@@ -132,14 +146,10 @@ class TableViewController: UITableViewController {
                 self.addAlertErro()
             }
             else{
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
                 //Caso Pressione OK e esteja com nome de usuario preenchido
                 self.UserConnect = self.MyTextField?.text
-                self.defaultUser.setValue(self.UserConnect, forKey: "UserConnect")
-                self.defaultUser.setValue(self.UserConnect, forKey: "userGitHub")
-                self.defaults.setValue(1, forKey: "isFirstAccess")
-                self.isFirstAccess = self.defaults.objectForKey("isFirstAccess") as! Int?
-                self.tableView.reloadData()
-                self.UserConnect = self.defaultUser.objectForKey("UserConnect") as! NSString?
+                
                 self.SearchWEB()
             }
         }
@@ -160,24 +170,55 @@ class TableViewController: UITableViewController {
         self.presentViewController(alert, animated: true, completion: {
         })
     }
+    
+  //Alerta caso nao encontre usuário
+    func AlertUser()
+    {
+        let alert:UIAlertController = UIAlertController(title: "Erro! Usuario Invalido", message: "Verifique o usuario e tente novamente ", preferredStyle: .Alert)
+        let action1:UIAlertAction = UIAlertAction(title: "OK", style: .Default) {action -> Void in
+            self.addAlertUser()
+        }
+        alert.addAction(action1)
+        
+        self.presentViewController(alert, animated: true, completion: {
+        })
+    }
+
 //================================Buscas na WEB==================================
     func SearchWEB(){
-        //Limpa o CoreData
-        RepositoryManager.sharedInstance.deleteAll()
+        
         
         //Faz a busca na WEB
         if let user = self.UserConnect as? String {
             if let repos: Array<RepositoryObject> = self.ws.getRepoArray (user) {
                 self.repositories = repos
-        
-                //Salva no banco de dados
-                for repository in self.repositories {
+                
+                //Caso nao encontre o usuário pesquisado
+                if repos.count == 0{
+                    self.AlertUser()
+                }
+                else{
+                    //Salva as informacoes
+                    self.defaultUser.setValue(self.UserConnect, forKey: "UserConnect")
+                    self.defaultUser.setValue(self.UserConnect, forKey: "userGitHub")
+                    self.defaults.setValue(1, forKey: "isFirstAccess")
+                    self.isFirstAccess = self.defaults.objectForKey("isFirstAccess") as! Int?
+                    self.tableView.reloadData()
+                    self.UserConnect = self.defaultUser.objectForKey("UserConnect") as! NSString?
+                    
+                    //Limpa o CoreData
+                    RepositoryManager.sharedInstance.deleteAll()
+                    
+                    //Salva no banco de dados
+                    for repository in self.repositories {
                     self.SaveRepositoryCoreData(repository)
+                }
+                
                 }
             }
         }
         self.tableView.reloadData()
-        self.title = self.UserConnect as String?
+        self.title = self.defaultUser.objectForKey("UserConnect") as! String?
         
     }
 //===================SALVANDO OBJETOS NO COREDATA===============================
