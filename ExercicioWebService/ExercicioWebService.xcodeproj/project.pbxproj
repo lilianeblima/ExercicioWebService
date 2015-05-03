@@ -18,6 +18,7 @@
 		1148E13E1AF2C91200283E68 /* Repositoryy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1148E13D1AF2C91200283E68 /* Repositoryy.swift */; };
 		1148E1431AF2CA0400283E68 /* LabelsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1148E1421AF2CA0400283E68 /* LabelsManager.swift */; };
 		1148E1451AF2CA2400283E68 /* RepositoryyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1148E1441AF2CA2400283E68 /* RepositoryyManager.swift */; };
+		11DDD9511AF5AA14007DE310 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 11DDD9501AF5AA14007DE310 /* Settings.bundle */; };
 		D643CE711AF255550010E7F1 /* JSONService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D643CE701AF255550010E7F1 /* JSONService.swift */; };
 		D643CE731AF2558B0010E7F1 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D643CE721AF2558B0010E7F1 /* JSON.swift */; };
 		D643CE751AF27A610010E7F1 /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D643CE741AF27A610010E7F1 /* Labels.swift */; };
@@ -53,6 +54,7 @@
 		1148E13D1AF2C91200283E68 /* Repositoryy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Repositoryy.swift; path = ../Repositoryy.swift; sourceTree = "<group>"; };
 		1148E1421AF2CA0400283E68 /* LabelsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelsManager.swift; sourceTree = "<group>"; };
 		1148E1441AF2CA2400283E68 /* RepositoryyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryyManager.swift; sourceTree = "<group>"; };
+		11DDD9501AF5AA14007DE310 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		D643CE701AF255550010E7F1 /* JSONService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONService.swift; sourceTree = "<group>"; };
 		D643CE721AF2558B0010E7F1 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSON.swift; path = ExercicioWebService/JSON.swift; sourceTree = "<group>"; };
 		D643CE741AF27A610010E7F1 /* Labels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 		0294BD711AEE6A8100BF3C98 = {
 			isa = PBXGroup;
 			children = (
+				11DDD9501AF5AA14007DE310 /* Settings.bundle */,
 				D643CE721AF2558B0010E7F1 /* JSON.swift */,
 				D643CE701AF255550010E7F1 /* JSONService.swift */,
 				0294BD7C1AEE6A8100BF3C98 /* ExercicioWebService */,
@@ -257,6 +260,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11DDD9511AF5AA14007DE310 /* Settings.bundle in Resources */,
 				0294BD881AEE6A8100BF3C98 /* Main.storyboard in Resources */,
 				0294BD8D1AEE6A8100BF3C98 /* LaunchScreen.xib in Resources */,
 				0294BD8A1AEE6A8100BF3C98 /* Images.xcassets in Resources */,
