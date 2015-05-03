@@ -91,29 +91,43 @@ class Webservice: NSObject {
         
         for repoDic in repoDics {
             //let pulls: AnyObject = getJSONData( (repoDic.objectForKey("pulls_url") as! String) )
-            let repoName = repoDic.objectForKey("name") as! String
             
             /// Temp object - é passado junto com a issue como value
             var repo = RepositoryObject()
-            repo.name = repoName
+            repo.name = repoDic.objectForKey("name") as? String
             repo.descrip = repoDic.objectForKey("description") as? String
             
             /// Saber se tem pulls (flag)
             var temPull = false
             
-            // Se tiver pull requests
-            if let pulls = getJSONData( "https://api.github.com/repos/mackmobile/\(repoName)/pulls") as? Array<NSDictionary>{
-                for pullReq in pulls {
+            var i = 1
+            
+            
+            //Verifica se há Pullrequests no repo
+            if let pullTest = getJSONData("https://api.github.com/repos/mackmobile/\(repo.name!)/pulls?state=all&page=\(i)") as? Array<NSDictionary>{
+                
+                //Armazena as páginas de busca que virá do while
+                var pulls: [NSDictionary] = pullTest
+                
+                while pulls != []{
                     
-                    let pullUser = pullReq.objectForKey("user")?.objectForKey("login") as? String
-                    //Se o usuário for o que deu pull
-                    if (pullUser == user) {
-                        let issue = getJSONData((pullReq.objectForKey("issue_url") as! String)) as! NSDictionary
-                        issue.setValue(repo, forKey: "repoTemp")
-                        issueArray.append(issue)
-                        temPull = true
+                    for pullReq in pulls {
+                        
+                        let pullUser = pullReq.objectForKey("user")?.objectForKey("login") as? String
+                        //Se o usuário for o que deu pull
+                        if (pullUser == user) {
+                            let issue = getJSONData((pullReq.objectForKey("issue_url") as! String)) as! NSDictionary
+                            issue.setValue(repo, forKey: "repoTemp")
+                            issueArray.append(issue)
+                            temPull = true
+                        }
                     }
+                    
+                    /// executa outra vez a busca em outra página
+                    i++
+                    pulls = getJSONData("https://api.github.com/repos/mackmobile/\(repo.name!)/pulls?state=all&page=\(i)") as! Array<NSDictionary>
                 }
+                
                 if !temPull {
                     var issue = ["repoTemp": repo]
                     issueArray.append(issue)
@@ -132,7 +146,8 @@ class Webservice: NSObject {
         
         var repoArray = Array<RepositoryObject>()
         
-        for repoDic in genIssueArray(user){
+        let issueArray:[NSDictionary] = genIssueArray(user)
+        for repoDic in issueArray {
             
             let repoTemp = repoDic.valueForKey("repoTemp") as! RepositoryObject
             var repo = RepositoryObject()
