@@ -30,6 +30,12 @@ class ViewController: UIViewController {
     
     func getLabels(arrLabels: NSNotification) {
         //pegar e mostrar labels
+        
+        //let info: Dictionary<String, String!> = labs.userInfo as! Dictionary<String, String>
+        
+        //let labelString = info("Labels")
+        
+        
     }
 
     

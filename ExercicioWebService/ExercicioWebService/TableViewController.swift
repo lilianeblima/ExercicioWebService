@@ -146,6 +146,7 @@ class TableViewController: UITableViewController {
         var reposi = RepositoryManager.sharedInstance.newRepository()
         reposi.name = repositoryWeb.name!
         //reposi.parent = repositoryWeb.parent!
+        
         //Salva as labels
         self.SaveLabelsCoreData(repositoryWeb, repositoryCoreData: reposi)
         RepositoryManager.sharedInstance.save()
@@ -220,8 +221,14 @@ class TableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let notif: NSNotificationCenter = NSNotificationCenter.defaultCenter()
         
+        let repoCoreData:Repositoryy = repositoriesCoreData[indexPath.row]
+        
+        var labs: NSDictionary = NSDictionary(object: repoCoreData.labels, forKey: "Labels")
+        
+        notif.postNotificationName("switchingViews", object: self, userInfo: labs as? [NSObject: AnyObject])
+        
 //        var arrLabels: NSDictionary = NSDictionary(object: labels, forKey:"passInfo")
-//        notif.postNotificationName("allLabels", object: self, userInfo: arrLabels as [NSObject: AnyObject])
+//        notif.postNotificationName("allLabels", obje		ct: self, userInfo: arrLabels as [NSObject: AnyObject])
     }
     
 
