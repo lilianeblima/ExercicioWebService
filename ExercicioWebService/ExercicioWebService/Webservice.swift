@@ -102,7 +102,6 @@ class Webservice: NSObject {
             
             var i = 1
             
-            
             //Verifica se há Pullrequests no repo
             if let pullTest = getJSONData("https://api.github.com/repos/mackmobile/\(repo.name!)/pulls?state=all&page=\(i)") as? Array<NSDictionary>{
                 
@@ -168,6 +167,7 @@ class Webservice: NSObject {
                     var label = LabelObject()
                     label.name = tempLabel.objectForKey("name") as? String
                     label.color = tempLabel.objectForKey("color") as? String
+                    label.repository = repo
                     
                     labelsArray.append(label)
                 }
@@ -176,6 +176,14 @@ class Webservice: NSObject {
             repoArray.append(repo)
         }
         return repoArray
+    }
+    
+    func getUserImageUrl (user:String) -> String {
+        
+        let userDic = getJSONData("https://api.github.com/users/\(user)") as? NSDictionary
+        let url = userDic?.objectForKey("avatar_url") as! String
+        
+        return url
     }
     
 }
