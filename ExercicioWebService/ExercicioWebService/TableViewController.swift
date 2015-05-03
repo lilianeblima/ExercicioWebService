@@ -123,7 +123,8 @@ class TableViewController: UITableViewController {
                 self.SearchWEB()
             }
             else{
-                self.SearchWEB()
+                //self.SearchWEB()  
+                //Ficava carregando muito depois que voltava da tela de labels
             }
             self.defaults.setValue(1, forKey: "isFirstAccess")
             isFirstAccess = defaults.objectForKey("isFirstAccess") as! Int?
