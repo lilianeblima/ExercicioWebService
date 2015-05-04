@@ -23,6 +23,7 @@ class TableViewController: UITableViewController {
     var isFirstAccess: Int?
     var repositories = Array<RepositoryObject>()
     let ws = Webservice()
+    var alertLoad:UIAlertController?
     lazy var repositoriesCoreData:Array<Repositoryy> = {
         return RepositoryManager.sharedInstance.getRepository()
         }()
@@ -75,10 +76,13 @@ class TableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
-
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        
+        //self.AlertFinish()//PARA TESTAR COM ALERTA CARREGANDO DESCOMENTE AKI
         let repoCoreData:Repositoryy = repositoriesCoreData[indexPath.row]
 
         cell.textLabel!.text = repoCoreData.name
+        
 
 
         return cell
@@ -153,11 +157,13 @@ class TableViewController: UITableViewController {
                 self.addAlertErro()
             }
             else{
+                    self.UserConnect = self.MyTextField?.text
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-                //Caso Pressione OK e esteja com nome de usuario preenchido
-                self.UserConnect = self.MyTextField?.text
+               // self.AlertLoad()//PARA TESTAR COM ALERTA CARREGANDO DESCOMENTE AKI
+
+                    self.SearchWEB()
                 
-                self.SearchWEB()
+                
             }
         }
         
@@ -175,6 +181,7 @@ class TableViewController: UITableViewController {
             self.addAlertUser()
         }
         alert.addAction(action1)
+        
         self.presentViewController(alert, animated: true, completion: {
         })
     }
@@ -191,42 +198,80 @@ class TableViewController: UITableViewController {
         self.presentViewController(alert, animated: true, completion: {
         })
     }
+    
+    func AlertLoad()
+    {
+        alertLoad = UIAlertController(title: "Carregando", message: "Aguarde ", preferredStyle: .Alert)
+        
+        self.presentViewController(alertLoad!, animated: true, completion: {
+        })
+    }
+    
+    func AlertFinish()
+    {
+        let alert:UIAlertController = UIAlertController(title: "Dados Carregados", message: "Pressione OK para concluir a operacao ", preferredStyle: .Alert)
+        let action1:UIAlertAction = UIAlertAction(title: "OK", style: .Default) {action -> Void in
+        }
+        alert.addAction(action1)
+        
+        self.presentViewController(alert, animated: true, completion: {
+        })
+    }
 
 ///================================Buscas na WEB==================================
     func SearchWEB(){
         
-        
-        //Faz a busca na WEB
-        if let user = self.UserConnect as? String {
-            if let repos: Array<RepositoryObject> = self.ws.getRepoArray (user) {
-                self.repositories = repos
-                
-                //Caso nao encontre o usuário pesquisado
-                if repos.count == 0{
-                    self.AlertUser()
-                }
-                else{
-                    //Salva as informacoes
-                    self.defaultUser.setValue(self.UserConnect, forKey: "UserConnect")
-                    self.defaultUser.setValue(self.UserConnect, forKey: "userGitHub")
-                    self.defaults.setValue(1, forKey: "isFirstAccess")
-                    self.isFirstAccess = self.defaults.objectForKey("isFirstAccess") as! Int?
-                    self.tableView.reloadData()
-                    self.UserConnect = self.defaultUser.objectForKey("UserConnect") as! NSString?
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            //Faz a busca na WEB
+            if let user = self.UserConnect as? String {
+                if let repos: Array<RepositoryObject> = self.ws.getRepoArray (user) {
+                    self.repositories = repos
                     
-                    //Limpa o CoreData
-                    RepositoryManager.sharedInstance.deleteAll()
-                    
-                    //Salva no banco de dados
-                    for repository in self.repositories {
-                    self.SaveRepositoryCoreData(repository)
-                }
-                
+                    //Caso nao encontre o usuário pesquisado
+                    if repos.count == 0{
+                        
+                        let priorityy = DISPATCH_QUEUE_PRIORITY_DEFAULT
+                        dispatch_async(dispatch_get_global_queue(priorityy, 0)) {
+                            self.AlertUser()
+                            dispatch_async(dispatch_get_main_queue()) {
+                                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                            }
+                        }
+                        
+                        
+                        
+                    }
+                    else{
+                        //Salva as informacoes
+                        self.defaultUser.setValue(self.UserConnect, forKey: "UserConnect")
+                        self.defaultUser.setValue(self.UserConnect, forKey: "userGitHub")
+                        self.defaults.setValue(1, forKey: "isFirstAccess")
+                        self.isFirstAccess = self.defaults.objectForKey("isFirstAccess") as! Int?
+                        self.tableView.reloadData()
+                        self.UserConnect = self.defaultUser.objectForKey("UserConnect") as! NSString?
+                        
+                        //Limpa o CoreData
+                        RepositoryManager.sharedInstance.deleteAll()
+                        
+                        //Salva no banco de dados
+                        for repository in self.repositories {
+                            self.SaveRepositoryCoreData(repository)
+                        }
+                        
+                    }
                 }
             }
+            self.tableView.reloadData()
+            self.title = self.defaultUser.objectForKey("UserConnect") as! String?
+
+            dispatch_async(dispatch_get_main_queue()) {
+               // self.AlertLoad() //PARA TESTAR COM ALERTA CARREGANDO DESCOMENTE AKI
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            }
         }
-        self.tableView.reloadData()
-        self.title = self.defaultUser.objectForKey("UserConnect") as! String?
+        
+        
         
     }
     
