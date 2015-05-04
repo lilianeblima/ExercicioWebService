@@ -107,7 +107,14 @@ class TableViewController: UITableViewController {
         
         let repoCoreData:Repositoryy = repositoriesCoreData[indexPath.row]
         
-       
+        var nomeRepo: NSDictionary = NSDictionary(object: repoCoreData, forKey: "msg")
+        
+        notifi.postNotificationName("nomeRepositorio", object: self, userInfo: nomeRepo as [NSObject: AnyObject])
+        
+            
+        let nextView = self.storyboard!.instantiateViewControllerWithIdentifier("ViewController") as! ViewController
+        
+        self.navigationController!.pushViewController(nextView, animated: true)
 
         
        // var labs: NSDictionary = NSDictionary(object: repoCoreData.labels, forKey: "Labels")

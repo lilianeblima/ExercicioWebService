@@ -47,9 +47,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="jId-gl-MMk" kind="show" id="HqP-eB-lKJ"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -69,10 +66,10 @@
             </objects>
             <point key="canvasLocation" x="1727" y="670"/>
         </scene>
-        <!--View Controller-->
+        <!--ViewController-->
         <scene sceneID="fb6-ZP-aAK">
             <objects>
-                <viewController id="jId-gl-MMk" customClass="ViewController" customModule="ExercicioWebService" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="ViewController" storyboardIdentifier="ViewController" title="ViewController" id="jId-gl-MMk" customClass="ViewController" customModule="ExercicioWebService" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BGc-oS-AVa"/>
                         <viewControllerLayoutGuide type="bottom" id="6s6-uy-YFG"/>
