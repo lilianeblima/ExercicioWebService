@@ -88,6 +88,14 @@ class TableViewController: UITableViewController {
         return cell
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+       let destination = segue.destinationViewController as! ViewController
+        let repoCoreData:Repositoryy = repositoriesCoreData[tableView.indexPathForSelectedRow()!.row]
+        destination.repositoriesCD = repoCoreData
+
+    }
+    
     func getDetails(arrayLabels: NSNotification) {
         
     }
@@ -95,12 +103,24 @@ class TableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         //========Notification Center==========
-        let notif: NSNotificationCenter = NSNotificationCenter.defaultCenter()
+        let notifi: NSNotificationCenter = NSNotificationCenter.defaultCenter()
         
         let repoCoreData:Repositoryy = repositoriesCoreData[indexPath.row]
-        var labs: NSDictionary = NSDictionary(object: repoCoreData.labels, forKey: "Labels")
         
-        notif.postNotificationName("switchingViews", object: self, userInfo: labs as? [NSObject: AnyObject])
+       
+
+        
+       // var labs: NSDictionary = NSDictionary(object: repoCoreData.labels, forKey: "Labels")
+
+
+//            for label in repoCoreData.labels {
+//                 var labelName:NSDictionary = NSDictionary(object: label.name, forKey: "labelName")
+//               // var labelColor:NSDictionary = NSDictionary(object: label.color, forKey: "labelColor")
+//                notifi.postNotificationName("switchingViews", object: self, userInfo: labelName as? [NSObject: AnyObject])
+//        }
+
+        
+//        notif.postNotificationName("switchingViews", object: self, userInfo: labs as? [NSObject: AnyObject])
         
         //        var arrLabels: NSDictionary = NSDictionary(object: labels, forKey:"passInfo")
         //        notif.postNotificationName("allLabels", obje		ct: self, userInfo: arrLabels as [NSObject: AnyObject])

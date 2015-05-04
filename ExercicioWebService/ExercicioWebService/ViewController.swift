@@ -9,6 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+     var labelsCD:Labels?
+    var repositoriesCD:Repositoryy?
 
     @IBOutlet weak var labelBronze1: UILabel!
     @IBOutlet weak var labelBronze2: UILabel!
@@ -30,11 +33,17 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        println(repositoriesCD?.labels.count)
+        
         // Do any additional setup after loading the view, typically from a nib.
         
-        let notif: NSNotificationCenter = NSNotificationCenter.defaultCenter()
+//        let notif: NSNotificationCenter = NSNotificationCenter.defaultCenter()
+//        
+//        notif.addObserver(self, selector: "getLabels:", name: "switchingViews", object: nil)
+        
+        
 
-        notif.addObserver(self, selector: "getLabels:", name: "switchingViews", object: nil)
+        //notif.addObserver(self, selector: "getLabels:", name: "switchingViews", object: nil)
 
     }
 
@@ -43,15 +52,10 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func getLabels(arrLabels: NSNotification) {
-        //pegar e mostrar labels
-        
-        //let info: Dictionary<String, String!> = labs.userInfo as! Dictionary<String, String>
-        
-        //let labelString = info("Labels")
-        
-        
-    }
+//    func getLabels(labelName: NSNotification) {
+//        //pegar e mostrar labels
+//
+//    }
 
     
     
