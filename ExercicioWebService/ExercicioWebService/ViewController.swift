@@ -31,9 +31,28 @@ class ViewController: UIViewController {
     @IBOutlet weak var labelOuro3: UILabel!
     @IBOutlet weak var labelProbOuro: UILabel!
 
+    func Label()
+    {
+        for label in repositoriesCD!.labels {
+            println(label.name)
+            labelBronze1.text = label.name
+            
+            
+//            var labelC = LabelsManager.sharedInstance.newLabel()
+//            labelC.name = label.name!
+//            labelC.color = label.color!
+//            labelC.repository = repositoryCoreData
+//            LabelsManager.sharedInstance.save()
+//            labelsCoreData = LabelsManager.sharedInstance.getLabel()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         println(repositoriesCD?.labels.count)
+        
+        self.Label()
         
         // Do any additional setup after loading the view, typically from a nib.
         

@@ -279,6 +279,7 @@ class TableViewController: UITableViewController {
                         self.UserConnect = self.defaultUser.objectForKey("UserConnect") as! NSString?
                         
                         //Limpa o CoreData
+                        LabelsManager.sharedInstance.deleteAll()
                         RepositoryManager.sharedInstance.deleteAll()
                         
                         //Salva no banco de dados

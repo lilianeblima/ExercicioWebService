@@ -51,6 +51,14 @@ public class LabelsManager {
         return Array<Labels>()
     }
     
-    
+    func deleteAll()
+    {
+        var array: Array<Labels> = getLabel()
+        
+        for rep: Labels in array{
+            managedContext.deleteObject(rep)
+            
+        }
+    }
     
 }
