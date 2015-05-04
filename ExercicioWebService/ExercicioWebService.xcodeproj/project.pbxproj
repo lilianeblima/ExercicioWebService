@@ -14,6 +14,7 @@
 		0294BD8A1AEE6A8100BF3C98 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0294BD891AEE6A8100BF3C98 /* Images.xcassets */; };
 		0294BD8D1AEE6A8100BF3C98 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0294BD8B1AEE6A8100BF3C98 /* LaunchScreen.xib */; };
 		0294BD991AEE6A8100BF3C98 /* ExercicioWebServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0294BD981AEE6A8100BF3C98 /* ExercicioWebServiceTests.swift */; };
+		02CBBD411AF720E6005AAC3B /* LabelsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CBBD401AF720E6005AAC3B /* LabelsTableViewController.swift */; };
 		02D4177D1AF0F8C5007DACF2 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D4177C1AF0F8C5007DACF2 /* TableViewController.swift */; };
 		1148E13E1AF2C91200283E68 /* Repositoryy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1148E13D1AF2C91200283E68 /* Repositoryy.swift */; };
 		1148E1431AF2CA0400283E68 /* LabelsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1148E1421AF2CA0400283E68 /* LabelsManager.swift */; };
@@ -49,6 +50,7 @@
 		0294BD921AEE6A8100BF3C98 /* ExercicioWebServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExercicioWebServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0294BD971AEE6A8100BF3C98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0294BD981AEE6A8100BF3C98 /* ExercicioWebServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercicioWebServiceTests.swift; sourceTree = "<group>"; };
+		02CBBD401AF720E6005AAC3B /* LabelsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelsTableViewController.swift; sourceTree = "<group>"; };
 		02D4177C1AF0F8C5007DACF2 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		112A92A61AF24A10007E615E /* RepositoryObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryObject.swift; sourceTree = "<group>"; };
 		1148E13D1AF2C91200283E68 /* Repositoryy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Repositoryy.swift; path = ../Repositoryy.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				0294BD7F1AEE6A8100BF3C98 /* AppDelegate.swift */,
 				0294BD841AEE6A8100BF3C98 /* ViewController.swift */,
 				02D4177C1AF0F8C5007DACF2 /* TableViewController.swift */,
+				02CBBD401AF720E6005AAC3B /* LabelsTableViewController.swift */,
 				1148E13F1AF2C92F00283E68 /* CoreData */,
 				0294BD861AEE6A8100BF3C98 /* Main.storyboard */,
 				D643CE6F1AF24C7F0010E7F1 /* Model */,
@@ -285,6 +288,7 @@
 				D66409981AF49383009432CF /* LabelObject.swift in Sources */,
 				D643CE711AF255550010E7F1 /* JSONService.swift in Sources */,
 				D643CE731AF2558B0010E7F1 /* JSON.swift in Sources */,
+				02CBBD411AF720E6005AAC3B /* LabelsTableViewController.swift in Sources */,
 				0294BD851AEE6A8100BF3C98 /* ViewController.swift in Sources */,
 				1148E13E1AF2C91200283E68 /* Repositoryy.swift in Sources */,
 				1148E1451AF2CA2400283E68 /* RepositoryyManager.swift in Sources */,

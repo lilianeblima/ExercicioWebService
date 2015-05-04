@@ -90,7 +90,7 @@ class TableViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-       let destination = segue.destinationViewController as! ViewController
+       let destination = segue.destinationViewController as! LabelsTableViewController
         let repoCoreData:Repositoryy = repositoriesCoreData[tableView.indexPathForSelectedRow()!.row]
         destination.repositoriesCD = repoCoreData
 
@@ -107,14 +107,14 @@ class TableViewController: UITableViewController {
         
         let repoCoreData:Repositoryy = repositoriesCoreData[indexPath.row]
         
-        var nomeRepo: NSDictionary = NSDictionary(object: repoCoreData, forKey: "msg")
-        
-        notifi.postNotificationName("nomeRepositorio", object: self, userInfo: nomeRepo as [NSObject: AnyObject])
-        
-            
-        let nextView = self.storyboard!.instantiateViewControllerWithIdentifier("ViewController") as! ViewController
-        
-        self.navigationController!.pushViewController(nextView, animated: true)
+//        var nomeRepo: NSDictionary = NSDictionary(object: repoCoreData, forKey: "msg")
+//        
+//        notifi.postNotificationName("nomeRepositorio", object: self, userInfo: nomeRepo as [NSObject: AnyObject])
+//        
+//            
+//        let nextView = self.storyboard!.instantiateViewControllerWithIdentifier("ViewController") as! ViewController
+//        
+//        self.navigationController!.pushViewController(nextView, animated: true)
 
         
        // var labs: NSDictionary = NSDictionary(object: repoCoreData.labels, forKey: "Labels")
@@ -125,12 +125,6 @@ class TableViewController: UITableViewController {
 //               // var labelColor:NSDictionary = NSDictionary(object: label.color, forKey: "labelColor")
 //                notifi.postNotificationName("switchingViews", object: self, userInfo: labelName as? [NSObject: AnyObject])
 //        }
-
-        
-//        notif.postNotificationName("switchingViews", object: self, userInfo: labs as? [NSObject: AnyObject])
-        
-        //        var arrLabels: NSDictionary = NSDictionary(object: labels, forKey:"passInfo")
-        //        notif.postNotificationName("allLabels", obje		ct: self, userInfo: arrLabels as [NSObject: AnyObject])
 
 
     }
