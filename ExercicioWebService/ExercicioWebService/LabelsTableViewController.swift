@@ -13,6 +13,7 @@ class LabelsTableViewController: UITableViewController {
     var labelsCD:Labels?
     var repositoriesCD:Repositoryy?
     var numberLabels: Int?
+    var repoLabels = Array<String>() //[String]?
     
     var labelsCoreData:Array<Labels> = {
         return LabelsManager.sharedInstance.getLabel()
@@ -31,6 +32,17 @@ class LabelsTableViewController: UITableViewController {
         numberLabels = repositoriesCD?.labels.count
         
         self.title = "Labels"
+        
+//        var repoLabels:Array<Labels> = labelsCoreData
+        
+        for label in repositoriesCD!.labels {
+            println(label.name)
+            //repoLabels
+            repoLabels.append(label.name as String)
+            println(repoLabels.count)
+            
+        }
+        
         
         self.Label()
     }
@@ -59,12 +71,11 @@ class LabelsTableViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell2", forIndexPath: indexPath) as! UITableViewCell
         
-        let labCoreData:Labels = labelsCoreData[indexPath.row]
+        let nameLabel = repoLabels[indexPath.row]
         
-        cell.textLabel!.text = labCoreData.name
-        
+        cell.textLabel!.text = nameLabel
 
         return cell
     }
@@ -118,7 +129,7 @@ class LabelsTableViewController: UITableViewController {
     func Label()
     {
         for label in repositoriesCD!.labels {
-            println(label.name)
+            //println(label.name)
             
             
             //            var labelC = LabelsManager.sharedInstance.newLabel()
