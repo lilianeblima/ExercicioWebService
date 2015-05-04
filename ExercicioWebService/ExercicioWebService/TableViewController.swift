@@ -33,31 +33,31 @@ class TableViewController: UITableViewController {
 
     
 
-//=============================BOTAO===========================================
+///=============================BOTAO===========================================
     @IBAction func ChangeUser(sender: AnyObject) {
         
         self.addAlertUser()
     }
     
-//==================Funcoes Padroes===================================
+///==================Funcoes Padroes===================================
     override func viewDidLoad() {
         super.viewDidLoad()
         UserConnect = defaultUser.objectForKey("UserConnect") as! NSString?
         self.title = self.UserConnect as String?
        //
        //UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-
         
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-
+        
         //Faz a leitura do CoreData e recarrega a tabela
         repositoriesCoreData = RepositoryManager.sharedInstance.getRepository()
         self.tableView.reloadData()
         
         //Seleciona um usuario
         self.UserSelec()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+
         
     }
 
@@ -106,7 +106,7 @@ class TableViewController: UITableViewController {
     
 //================================FUNCOES=======================================
     
-    //===========Funcao que verifica se ja tem usuario configurado nos settings======
+    ///===========Funcao que verifica se ja tem usuario configurado nos settings======
     func UserSelec(){
      //   self.AlertLoading()
         UserGitSettings = self.defaultUser.objectForKey("userGitHub") as? String
@@ -123,8 +123,7 @@ class TableViewController: UITableViewController {
                 self.SearchWEB()
             }
             else{
-                //self.SearchWEB()  
-                //Ficava carregando muito depois que voltava da tela de labels
+                self.SearchWEB()
             }
             self.defaults.setValue(1, forKey: "isFirstAccess")
             isFirstAccess = defaults.objectForKey("isFirstAccess") as! Int?
@@ -134,7 +133,7 @@ class TableViewController: UITableViewController {
     }
     
 //================================Alertas======================================
- //Alerta Principal para inserir usuario
+ /// Alerta Principal para inserir usuario
     func addAlertUser()
     {
         let alert:UIAlertController = UIAlertController(title: "Pesquisa de usuário", message: "Por Favor, insira o user desejado", preferredStyle: .Alert)
@@ -168,7 +167,7 @@ class TableViewController: UITableViewController {
         })
     }
     
-  //Alerta Secundário para informar que é preciso preencher o usuario
+  /// Alerta Secundário para informar que é preciso preencher o usuario
     func addAlertErro()
     {
         let alert:UIAlertController = UIAlertController(title: "Erro", message: "Por Favor, insira o user desejado", preferredStyle: .Alert)
@@ -180,7 +179,7 @@ class TableViewController: UITableViewController {
         })
     }
     
-  //Alerta caso nao encontre usuário
+  /// Alerta caso nao encontre usuário
     func AlertUser()
     {
         let alert:UIAlertController = UIAlertController(title: "Erro! Usuario Invalido", message: "Verifique o usuario e tente novamente ", preferredStyle: .Alert)
@@ -193,7 +192,7 @@ class TableViewController: UITableViewController {
         })
     }
 
-//================================Buscas na WEB==================================
+///================================Buscas na WEB==================================
     func SearchWEB(){
         
         
@@ -233,7 +232,7 @@ class TableViewController: UITableViewController {
     
 //===================SALVANDO OBJETOS NO COREDATA===============================
     
-        //Salva o objeto repositorio que vem da WEB no CoreData
+    ///Salva o objeto repositorio que vem da WEB no CoreData
     func SaveRepositoryCoreData(repositoryWeb:RepositoryObject){
         var reposi = RepositoryManager.sharedInstance.newRepository()
         reposi.name = repositoryWeb.name!
@@ -244,7 +243,7 @@ class TableViewController: UITableViewController {
         repositoriesCoreData = RepositoryManager.sharedInstance.getRepository()
     }
     
-    //Salva as Labels
+    ///Salva as Labels
     func SaveLabelsCoreData(repositoryWeb:RepositoryObject, repositoryCoreData:Repositoryy)
     {
         for label in repositoryWeb.labels {
